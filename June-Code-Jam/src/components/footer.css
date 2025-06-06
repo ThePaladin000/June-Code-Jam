@@ -1,0 +1,12 @@
+.footer-contributors {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  /* justify-content: center; */
+  gap: 100px;
+}
+
+.footer-contributor {
+  display: flex;
+  flex-direction: row;
+}
