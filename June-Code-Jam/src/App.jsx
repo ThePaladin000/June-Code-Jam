@@ -9,7 +9,7 @@ import { loadGoogleMapsScript } from "./utils/loadGoogleMaps";
 
 function App() {
   useEffect(() => {
-    loadGoogleMapsScript(import.meta.env.MAPS_API_KEY);
+    loadGoogleMapsScript(import.meta.env.VITE_MAPS_API_KEY);
   }, []);
 
   return (
