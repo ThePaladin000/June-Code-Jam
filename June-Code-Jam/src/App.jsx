@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import Search from "./components/search";
+import { loadGoogleMapsScript } from "./utils/loadGoogleMaps";
 
 function App() {
-  const [count, setCount] = useState(0);
+  useEffect(() => {
+    loadGoogleMapsScript(import.meta.env.VITE_MAPS_API_KEY);
+  }, []);
 
   return (
     <>

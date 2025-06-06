@@ -7,6 +7,7 @@
   width: 100%;
   max-width: 400px;
   margin: 0 auto 2rem auto;
+  z-index: 20;
 }
 
 .search-input {
@@ -31,4 +32,32 @@
   color: #888;
   font-size: 1.1rem;
   pointer-events: none;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  color: #222;
+  border: 1px solid #ccc;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.autocomplete-item {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.autocomplete-item:hover {
+  background: #f0f8ff;
 }
