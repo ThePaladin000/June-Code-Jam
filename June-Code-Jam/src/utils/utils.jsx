@@ -1,5 +1,5 @@
 export async function fetchAutocompleteSuggestions(input) {
-  const apiKey = import.meta.env.VITE_MAPS_API_KEY;
+  const apiKey = import.meta.env.MAPS_API_KEY;
   if (!input) return [];
   const url = "https://places.googleapis.com/v1/places:autocomplete";
   const body = JSON.stringify({
