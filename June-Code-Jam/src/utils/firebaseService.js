@@ -4,6 +4,12 @@ import {
     collection,
     addDoc,
     getDocs,
+    doc,
+    getDoc,
+    setDoc,
+    updateDoc,
+    arrayUnion,
+    arrayRemove,
     serverTimestamp,
 } from 'firebase/firestore';
 
@@ -43,23 +49,100 @@ export const placesService = {
 
 export const userDataService = {
 
-  async savePlace(userId, placeId) {
-    try {
-        console.log("Saving place for user:", userId, "with place:", placeId);
-        return true;
-    } catch (error) {
-        console.error("Error saving place:", error);
-        throw error;
-    }
-  },
+    async savePlace(userId, placeId) {
+        try {
+          const userDocRef = doc(db, "userSavedPlaces", userId);
+          
+          const userDoc = await getDoc(userDocRef);
+          
+          if (userDoc.exists()) {
+            await updateDoc(userDocRef, {
+              savedPlaces: arrayUnion(placeId),
+              lastUpdated: serverTimestamp()
+            });
+          } else {
+            await setDoc(userDocRef, {
+              userId: userId,
+              savedPlaces: [placeId],
+              createdAt: serverTimestamp(),
+              lastUpdated: serverTimestamp()
+            });
+          }
+          
+          console.log(`Place ${placeId} saved for user ${userId}`);
+          return true;
+        } catch (error) {
+          console.error("Error saving place:", error);
+          throw error;
+        }
+      },
 
-  async getSavedPlaces(userId) {
-    try {
-      console.log(`Getting saved places for user ${userId}`);
-      return [];
-    } catch (error) {
-      console.error("Error getting saved places:", error);
-      throw error;
-    }
-  }
+      async removeSavedPlace(userId, placeId) {
+        try {
+          const userDocRef = doc(db, "userSavedPlaces", userId);
+          
+          await updateDoc(userDocRef, {
+            savedPlaces: arrayRemove(placeId),
+            lastUpdated: serverTimestamp()
+          });
+          
+          console.log(`Place ${placeId} removed from user ${userId}'s saved places`);
+          return true;
+        } catch (error) {
+          console.error("Error removing saved place:", error);
+          throw error;
+        }
+      },
+
+      async getSavedPlaces(userId) {
+        try {
+          const userDocRef = doc(db, "userSavedPlaces", userId);
+          const userDoc = await getDoc(userDocRef);
+          
+          if (!userDoc.exists()) {
+            console.log(`No saved places found for user ${userId}`);
+            return [];
+          }
+          
+          const savedPlaceIds = userDoc.data().savedPlaces || [];
+          
+          if (savedPlaceIds.length === 0) {
+            return [];
+          }
+          
+          const savedPlaces = [];
+          for (const placeId of savedPlaceIds) {
+            const placeDoc = await getDoc(doc(db, "places", placeId));
+            if (placeDoc.exists()) {
+              savedPlaces.push({
+                id: placeDoc.id,
+                ...placeDoc.data()
+              });
+            }
+          }
+          
+          console.log(`Retrieved ${savedPlaces.length} saved places for user ${userId}`);
+          return savedPlaces;
+        } catch (error) {
+          console.error("Error getting saved places:", error);
+          throw error;
+        }
+      },
+
+      async isPlaceSaved(userId, placeId) {
+        try {
+          const userDocRef = doc(db, "userSavedPlaces", userId);
+          const userDoc = await getDoc(userDocRef);
+          
+          if (!userDoc.exists()) {
+            return false;
+          }
+          
+          const savedPlaces = userDoc.data().savedPlaces || [];
+          return savedPlaces.includes(placeId);
+        } catch (error) {
+          console.error("Error checking if place is saved:", error);
+          throw error;
+        }
+      }
 }
