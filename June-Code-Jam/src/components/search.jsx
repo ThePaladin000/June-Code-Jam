@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { fetchAutocompleteSuggestions } from "../utils/utils";
 import Cards from "./cards";
 import "./cards.css";
 import "./search.css";
@@ -8,30 +9,14 @@ export default function Search() {
   const [query, setQuery] = useState("");
   const [predictions, setPredictions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const autocompleteServiceRef = useRef(null);
 
-  // Only initialize AutocompleteService if available
-  if (
-    !autocompleteServiceRef.current &&
-    window.google &&
-    window.google.maps &&
-    window.google.maps.places
-  ) {
-    autocompleteServiceRef.current =
-      new window.google.maps.places.AutocompleteService();
-  }
-
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const value = e.target.value;
     setQuery(value);
-    if (value && autocompleteServiceRef.current) {
-      autocompleteServiceRef.current.getPlacePredictions(
-        { input: value },
-        (preds) => {
-          setPredictions(preds || []);
-          setShowDropdown(!!preds && preds.length > 0);
-        }
-      );
+    if (value) {
+      const results = await fetchAutocompleteSuggestions(value);
+      setPredictions(results);
+      setShowDropdown(results.length > 0);
     } else {
       setPredictions([]);
       setShowDropdown(false);
@@ -66,11 +51,14 @@ export default function Search() {
           <ul className="autocomplete-dropdown">
             {predictions.map((p) => (
               <li
-                key={p.place_id}
+                key={p.placeId}
                 onMouseDown={() => handleSelect(p.description)}
                 className="autocomplete-item"
               >
-                {p.description}
+                <span style={{ fontWeight: "bold" }}>{p.mainText}</span>
+                <span style={{ color: "#888", marginLeft: 4 }}>
+                  {p.secondaryText}
+                </span>
               </li>
             ))}
           </ul>
