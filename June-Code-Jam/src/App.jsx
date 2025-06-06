@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -16,7 +14,7 @@ function App() {
     <>
       <Navbar />
       <div className="main-container">
-        <h1>Green Finder</h1>
+        <h1>Green Findr</h1>
         <Search />
       </div>
       <Footer />
