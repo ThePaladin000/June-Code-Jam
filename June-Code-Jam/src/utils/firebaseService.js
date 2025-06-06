@@ -27,9 +27,9 @@ export const placesService = {
           console.error("Error adding place:", error);
           throw error;
         }
-      },
+    },
 
-      async getAllPlaces() {
+    async getAllPlaces() {
         try {
           const querySnapshot = await getDocs(collection(db, "places"));
           const places = [];
@@ -44,7 +44,124 @@ export const placesService = {
           console.error("Error getting places:", error);
           throw error;
         }
-      }
+    },
+
+    async getPlaceById(placeId) {
+        try {
+          const placeDoc = await getDoc(doc(db, "places", placeId));
+          
+          if (!placeDoc.exists()) {
+            throw new Error(`Place with ID ${placeId} not found`);
+          }
+          
+          const place = {
+            id: placeDoc.id,
+            ...placeDoc.data()
+          };
+          
+          console.log(`Retrieved place: ${place.name}`);
+          return place;
+        } catch (error) {
+          console.error("Error getting place by ID:", error);
+          throw error;
+        }
+    },
+
+    async updatePlace(placeId, updates) {
+        try {
+          const placeRef = doc(db, "places", placeId);
+          
+          // Check if place exists first
+          const placeDoc = await getDoc(placeRef);
+          if (!placeDoc.exists()) {
+            throw new Error(`Place with ID ${placeId} not found`);
+          }
+          
+          // Add update timestamp
+          const updateData = {
+            ...updates,
+            lastUpdated: serverTimestamp()
+          };
+          
+          await updateDoc(placeRef, updateData);
+          
+          console.log(`Place ${placeId} updated successfully`);
+          return true;
+        } catch (error) {
+          console.error("Error updating place:", error);
+          throw error;
+        }
+    },
+
+    async deletePlace(placeId) {
+        try {
+          const placeRef = doc(db, "places", placeId);
+          
+          // Check if place exists first
+          const placeDoc = await getDoc(placeRef);
+          if (!placeDoc.exists()) {
+            throw new Error(`Place with ID ${placeId} not found`);
+          }
+          
+          await deleteDoc(placeRef);
+          
+          console.log(`Place ${placeId} deleted successfully`);
+          return true;
+        } catch (error) {
+          console.error("Error deleting place:", error);
+          throw error;
+        }
+    },
+    
+    async updatePlaceField(placeId, fieldName, fieldValue) {
+        try {
+          const updates = {
+            [fieldName]: fieldValue,
+            lastUpdated: serverTimestamp()
+          };
+          
+          await this.updatePlace(placeId, updates);
+          console.log(`Updated ${fieldName} for place ${placeId}`);
+          return true;
+        } catch (error) {
+          console.error(`Error updating ${fieldName}:`, error);
+          throw error;
+        }
+    },
+
+    async addAmenityToPlace(placeId, amenity) {
+        try {
+          const placeRef = doc(db, "places", placeId);
+          
+          await updateDoc(placeRef, {
+            amenities: arrayUnion(amenity),
+            lastUpdated: serverTimestamp()
+          });
+          
+          console.log(`Added amenity '${amenity}' to place ${placeId}`);
+          return true;
+        } catch (error) {
+          console.error("Error adding amenity:", error);
+          throw error;
+        }
+    },
+
+    async removeAmenityFromPlace(placeId, amenity) {
+        try {
+          const placeRef = doc(db, "places", placeId);
+          
+          await updateDoc(placeRef, {
+            amenities: arrayRemove(amenity),
+            lastUpdated: serverTimestamp()
+          });
+          
+          console.log(`Removed amenity '${amenity}' from place ${placeId}`);
+          return true;
+        } catch (error) {
+          console.error("Error removing amenity:", error);
+          throw error;
+        }
+    }
 }
 
 export const userDataService = {
