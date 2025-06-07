@@ -19,8 +19,6 @@ export {
     serverTimestamp,
 } from 'firebase/firestore';
 
-
-
 //  (Haversine formula)
 export function calculateDistance(lat1, lng1, lat2, lng2) {
     const R = 6371; // Earth's radius in kilometers
@@ -40,7 +38,6 @@ export function calculateDistance(lat1, lng1, lat2, lng2) {
 export function toRadians(degrees) {
     return degrees * (Math.PI / 180);
 }
-
 
 export function handleFirebaseError(operation, error) {
     console.error(`Error during ${operation}:`, error);
