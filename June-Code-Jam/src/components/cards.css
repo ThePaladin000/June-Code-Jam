@@ -1,13 +1,31 @@
-.cards-container {
+.cards-containers {
   display: flex;
-  gap: 100px;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: none;
+  transition: box-shadow .3s linear;
+  cursor: pointer;
+}
+
+.card-container:hover {
+  box-shadow: 1px 1px 10px 2px rgb(32, 44, 1, 1);
 }
 
 .card {
-  max-width: 240px;
-  width: 100%;
-  max-height: 345px;
-  height: 100%;
+  max-width: 275px;
+  height: 325px;
+  border: 2px solid #202c01;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
 }
 
@@ -17,12 +35,17 @@
   object-fit: cover;
 }
 
-.card-title {
-  font-size: 16px;
-  font-weight: 600;
-}
 
 .card-description {
-  font-size: 14px;
-  font-weight: 400;
+  font-family: "CrimsonPro-BoldItalic";
+  font-size: 20px;
+  padding: 0;
+  margin: auto 0;
+  max-width: 275px;
+  height: 50px;
+  border: 2px solid #A0522D;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
+
+
