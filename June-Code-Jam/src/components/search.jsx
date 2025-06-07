@@ -6,6 +6,7 @@ import { useUser } from "@clerk/clerk-react";
 import "./cards.css";
 import "./search.css";
 
+
 const SEARCH_LIMIT = 3;
 const STORAGE_KEY = "searches_this_month";
 
