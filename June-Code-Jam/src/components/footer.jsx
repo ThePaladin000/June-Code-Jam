@@ -19,7 +19,15 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer-contributor-container">
-          <p style={{backgroundImage: grass }} className="footer-contributor-name">Crow</p>
+            <a
+              href="https://github.com/Buffalo-Crow"
+              style={{ backgroundImage: grass }}
+              className="footer-contributor-name"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Crow
+            </a>
           </div>
         </div>
         <div className="footer-contributor">
@@ -33,7 +41,15 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer-contributor-container">
-          <p style={{backgroundImage: grass }} className="footer-contributor-name">Ri₵h</p>
+            <a
+              href="https://github.com/TonyRiches17"
+              style={{ backgroundImage: grass }}
+              className="footer-contributor-name"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ri₵h
+            </a>
           </div>
         </div>
         <div className="footer-contributor">
@@ -47,7 +63,15 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer-contributor-container">
-          <p style={{backgroundImage: grass }} className="footer-contributor-name">Majestik</p>
+            <a
+              href="https://github.com/Majestyk1"
+              style={{ backgroundImage: grass }}
+              className="footer-contributor-name"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Majestik
+            </a>
           </div>
         </div>
         <div className="footer-contributor">
@@ -61,11 +85,19 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer-contributor-container">
-          <p style={{backgroundImage: grass }} className="footer-contributor-name">Joshua</p>
+            <a
+              href="https://github.com/ThePaladin000"
+              style={{ backgroundImage: grass }}
+              className="footer-contributor-name"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Joshua
+            </a>
           </div>
         </div>
       </div>
-          <h3 className="footer-footer">&copy;2025 Created by</h3>
+      <h3 className="footer-footer">&copy;2025 Created by</h3>
     </div>
   );
 }

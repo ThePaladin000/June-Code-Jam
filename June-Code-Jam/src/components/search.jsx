@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { fetchAutocompleteSuggestions } from "../utils/utils";
-import Cards from "./cards";
 import { useUser } from "@clerk/clerk-react";
-import "./cards.css";
 import "./search.css";
-
 
 const SEARCH_LIMIT = 3;
 const STORAGE_KEY = "searches_this_month";
@@ -100,7 +97,6 @@ export default function Search() {
           </ul>
         )}
       </form>
-      <Cards />
     </div>
   );
 }
