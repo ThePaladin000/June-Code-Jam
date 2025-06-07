@@ -1,23 +1,7 @@
 import {db} from '../../firebaseConfig.js';
+
 export { db };
 
-export {
-    collection,
-    addDoc,
-    getDocs,
-    doc,
-    getDoc,
-    setDoc,
-    updateDoc,
-    deleteDoc,
-    query,
-    where,
-    orderBy,
-    limit,
-    arrayUnion,
-    arrayRemove,
-    serverTimestamp,
-} from 'firebase/firestore';
 
 //  (Haversine formula)
 export function calculateDistance(lat1, lng1, lat2, lng2) {
@@ -40,13 +24,15 @@ export function toRadians(degrees) {
 }
 
 export function handleFirebaseError(operation, error) {
-    console.error(`Error during ${operation}:`, error);
-    
+    console.error(`Error during ${operation}:`, error); 
     if (error.code === 'permission-denied') {
-        throw new Error(`Permission denied: You don't have access to ${operation}`);
-    } else if (error.code === 'not-found') {
-        throw new Error(`Resource not found during ${operation}`);
-    } else {
-        throw error;
+        throw new Error(`Permission denied. You don't have access to ${operation}.`);
     }
+    if (error.code === 'not-found') {
+        throw new Error(`Item not found. It may have been deleted.`);
+    }  
+    if (error.message?.includes('network')) {
+        throw new Error(`Network error. Please check your connection and try again.`);
+    }   
+    throw new Error(`Something went wrong during ${operation}. Please try again.`);
 }

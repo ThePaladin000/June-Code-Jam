@@ -1,5 +1,5 @@
+import { db, calculateDistance, handleFirebaseError } from './firebaseUtils.js';
 import { 
-    db,
     collection,
     addDoc,
     getDocs,
@@ -14,9 +14,7 @@ import {
     arrayUnion,
     arrayRemove,
     serverTimestamp,
-    calculateDistance,
-    handleFirebaseError
-} from './firebaseUtils.js';
+} from 'firebase/firestore';
 
 export const placesService = {
 

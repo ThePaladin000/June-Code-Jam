@@ -1,5 +1,5 @@
+import { db, handleFirebaseError } from './firebaseUtils.js';
 import { 
-    db,
     doc,
     getDoc,
     setDoc,
@@ -7,8 +7,7 @@ import {
     arrayUnion,
     arrayRemove,
     serverTimestamp,
-    handleFirebaseError
-} from './firebaseUtils.js';
+} from 'firebase/firestore';
 
 export const userDataService = {
     async savePlace(userId, placeId) {
