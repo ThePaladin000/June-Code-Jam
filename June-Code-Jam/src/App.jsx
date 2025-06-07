@@ -11,7 +11,7 @@ function App() {
     <>
       <Navbar />
       <div className="main-container">
-        <h1>Green Finder</h1>
+        <h1>Green Findr</h1>
         <Search />
       </div>
       <Footer />
