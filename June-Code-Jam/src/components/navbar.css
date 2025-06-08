@@ -49,3 +49,9 @@
   background: #21a1f3;
   color: #fff;
 }
+
+.navbar__avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}

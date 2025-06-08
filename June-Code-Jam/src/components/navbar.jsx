@@ -3,6 +3,7 @@ import {
   SignedOut,
   SignInButton,
   UserButton,
+  useUser,
 } from "@clerk/clerk-react";
 
 import Logo from "../assets/GreenFindericon.svg";
@@ -12,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const { user } = useUser();
+
   return (
     <header className="navbar">
       <div className="navbar-left">
@@ -34,7 +37,15 @@ export default function Navbar() {
           <SignInButton className="navbar__signin-btn" mode="modal" />
         </SignedOut>
         <SignedIn>
-          <UserButton />
+          {user && (
+            <img
+              src={user.imageUrl}
+              alt="User avatar"
+              title={user.fullName}
+              className="navbar__avatar"
+              onClick={() => navigate("/profile")}
+            />
+          )}
         </SignedIn>
       </div>
     </header>
