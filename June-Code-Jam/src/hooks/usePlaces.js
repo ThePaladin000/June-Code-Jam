@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { placesService } from '../utils/placeService'
+import { placesService } from '../utils/placesService.js'
 
 export function usePlaces() {
 
