@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "root": "June-Code-Jam",
   "builds": [{ "src": "api/mapsServer.js", "use": "@vercel/node" }],
   "routes": [
     {
