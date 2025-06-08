@@ -1,6 +1,13 @@
 {
   "version": 2,
-  "builds": [{ "src": "api/mapsServer.js", "use": "@vercel/node" }],
+  "builds": [
+    { "src": "api/mapsServer.js", "use": "@vercel/node" },
+    {
+      "src": "vite.config.js",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
   "routes": [
     {
       "src": "/api/(nearby-parks|place-details)",
