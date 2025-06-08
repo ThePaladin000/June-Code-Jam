@@ -60,7 +60,7 @@ const searchPlaces = useCallback(async (searchTerm)=> {
    } finally {
     setLoading(false);
    }
-}, [])
+}, []);
 
 // filter places by type 
 const getPlacesByType = useCallback(async (placeType)=> {
