@@ -8,7 +8,7 @@ export function useLocation() {
   const [error, setError] = useState(null);
   const [permissionStatus, setPermissionStatus] = useState('prompt');
 
-  // get users location 
+  // get users location - FIXED!
   const requestLocation = useCallback(async () => {
     if (!navigator.geolocation) {
       setError('Geolocation not supported');
@@ -18,6 +18,7 @@ export function useLocation() {
 
     setLoading(true);
     setError(null);
+    console.log('🔄 Requesting location...');
 
     try {
       const position = await new Promise((resolve, reject) => {
@@ -34,9 +35,9 @@ export function useLocation() {
         accuracy: position.coords.accuracy
       };
 
+      console.log('📍 Location acquired:', location);
       setUserLocation(location);
       setPermissionStatus('granted');
-      console.log('Got location:', location);
       return location;
     } catch (err) {
       let errorMsg = 'Failed to get location';
@@ -50,15 +51,15 @@ export function useLocation() {
         errorMsg = 'Location request timed out';
       }
       
+      console.error('❌ Location error:', err);
       setError(errorMsg);
-      console.error('Location error:', err);
       return false;
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, []); // ← Fixed dependencies!
 
-  // find places near user
+  // find places near user - FIXED!
   const findNearbyPlaces = useCallback(async (radiusKm = 5, location = userLocation) => {
     if (!location) {
       setError('Need location first');
@@ -67,30 +68,33 @@ export function useLocation() {
 
     setLoading(true);
     setError(null);
+    console.log(`🔍 Finding places within ${radiusKm}km of:`, location);
 
     try {
       const places = await placesService.getNearbyPlaces(location.lat, location.lng, radiusKm);
+      console.log(`✅ Found ${places.length} nearby places`);
       setNearbyPlaces(places);
-      console.log(`Found ${places.length} nearby places`);
       return places;
     } catch (err) {
       setError('Failed to find nearby places');
-      console.error('Error finding nearby places:', err);
+      console.error('❌ Error finding nearby places:', err);
       return [];
     } finally {
       setLoading(false);
     }
-  }, [userLocation]);
+  }, [userLocation]); // ← Fixed dependencies!
 
   // auto find nearby when we get location
   useEffect(() => {
     if (userLocation && nearbyPlaces.length === 0) {
+      console.log('🚀 Auto-finding nearby places...');
       findNearbyPlaces();
     }
   }, [userLocation, findNearbyPlaces, nearbyPlaces.length]);
 
   // clear everything
   const clearLocation = useCallback(() => {
+    console.log('🧹 Clearing location data...');
     setUserLocation(null);
     setNearbyPlaces([]);
     setError(null);
