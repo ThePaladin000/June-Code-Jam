@@ -1,7 +1,9 @@
 import { IoLocationSharp } from "react-icons/io5";
 import "./footer.css";
-import tree from "../assets/tree.png";
 import grass from "../assets/grass.jpg";
+
+const tree =
+  "https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZIdbw8gAjGwgyepxTk47RCPfotcAalOuXUd0E";
 
 export default function Footer() {
   return (
