@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   max-width: 1280px;
+  padding-top: 20px;
   margin: 0 auto;
   color: #fff;
 }
@@ -21,7 +22,7 @@
 }
 
 .navbar-icon:hover {
-  color: #61dafb;
+  color: #556b2f;
 }
 
 .navbar-right {
@@ -39,6 +40,9 @@
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
+}
+.navbar__signin-btn {
+  font-family: "CrimsonPro-BoldItalic";
 }
 
 .navbar-btn:hover {
