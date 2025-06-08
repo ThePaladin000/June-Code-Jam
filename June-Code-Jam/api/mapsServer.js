@@ -5,16 +5,26 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import "dotenv/config";
+import fs from "fs";
+import path from "path";
+
+// Decode and write the service account file if running in Vercel
+if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+  const serviceAccountPath = "/tmp/service-account.json";
+  const json = Buffer.from(
+    process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
+    "base64"
+  ).toString("utf-8");
+  fs.writeFileSync(serviceAccountPath, json);
+  process.env.GOOGLE_APPLICATION_CREDENTIALS = serviceAccountPath;
+}
 
 // For __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Path to your service account key file
-const SERVICE_ACCOUNT_KEY_PATH = path.join(
-  __dirname,
-  "../service-account.json"
-);
+const SERVICE_ACCOUNT_KEY_PATH = "/tmp/service-account.json";
 
 const app = express();
 app.use(cors());
