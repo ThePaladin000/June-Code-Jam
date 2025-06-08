@@ -1,7 +1,12 @@
 {
   "version": 2,
-  "builds": [{ "src": "api/mapsServer.js", "use": "@vercel/node" }],
+  "builds": [
+    { "src": "June-Code-Jam/api/mapsServer.js", "use": "@vercel/node" }
+  ],
   "routes": [
-    { "src": "/api/(nearby-parks|place-details)", "dest": "api/mapsServer.js" }
+    {
+      "src": "/api/(nearby-parks|place-details)",
+      "dest": "June-Code-Jam/api/mapsServer.js"
+    }
   ]
 }
