@@ -1,5 +1,5 @@
 {
-  "name": "june-code-jam",
+  "name": "june-code-jam-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,12 +11,7 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.31.9",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
     "firebase": "^11.9.0",
-    "google-auth-library": "^9.15.1",
-    "node-fetch": "^3.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
