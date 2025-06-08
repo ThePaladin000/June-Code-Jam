@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { fetchAutocompleteSuggestions } from '../utils/utils';
 import { placesService } from '../utils/index';
@@ -24,8 +24,8 @@ export function useSearch() {
   const [error, setError] = useState(null);
   const [searchHistory, setSearchHistory] = useState([]);
 
-  // Debouncing state
-  const [debounceTimer, setDebounceTimer] = useState(null);
+  // Use ref for timer to avoid stale closures
+  const debounceTimerRef = useRef(null);
 
   // Load search history on mount
   useEffect(() => {
@@ -58,22 +58,21 @@ export function useSearch() {
     }
   }, []);
 
-  // Handle search input with debouncing
+  // Handle search input with debouncing - FIXED!
   const handleSearchInput = useCallback((value) => {
     setQuery(value);
 
-    // Clear existing timer
-    if (debounceTimer) {
-      clearTimeout(debounceTimer);
+    // Clear existing timer using ref
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
     }
 
     // Set new timer for debounced search
-    const newTimer = setTimeout(() => {
+    debounceTimerRef.current = setTimeout(() => {
       fetchPredictions(value);
     }, 300); // 300ms debounce
 
-    setDebounceTimer(newTimer);
-  }, [debounceTimer, fetchPredictions]);
+  }, [fetchPredictions]); // ← Fixed dependencies!
 
   // Handle selecting a prediction
   const handleSelectPrediction = useCallback((prediction) => {
@@ -95,9 +94,12 @@ export function useSearch() {
     return true;
   }, [isSignedIn]);
 
-  // Perform actual search
-  const performSearch = useCallback(async (searchTerm = query) => {
-    if (!searchTerm.trim()) {
+  // Perform actual search - ENHANCED!
+  const performSearch = useCallback(async (searchTerm) => {
+    // Use current query if no searchTerm provided
+    const termToSearch = searchTerm || query;
+    
+    if (!termToSearch.trim()) {
       setError("Please enter a search term");
       return [];
     }
@@ -116,11 +118,15 @@ export function useSearch() {
       }
 
       // Search places using Firebase
-      const results = await placesService.searchPlaces(searchTerm);
+      console.log('🔍 Searching for:', termToSearch);
+      const results = await placesService.searchPlaces(termToSearch);
+      console.log('🎯 Search results received:', results);
+      
+      // Update state
       setSearchResults(results);
 
       // Update search history
-      const newHistory = addToSearchHistory(searchTerm);
+      const newHistory = addToSearchHistory(termToSearch);
       setSearchHistory(newHistory);
 
       setShowDropdown(false);
@@ -132,7 +138,7 @@ export function useSearch() {
     } finally {
       setLoading(false);
     }
-  }, [query, checkSearchLimit, isSignedIn]);
+  }, [query, checkSearchLimit, isSignedIn]); // ← Fixed dependencies!
 
   // Submit search (for form submission)
   const handleSearchSubmit = useCallback(async (e) => {
@@ -140,13 +146,19 @@ export function useSearch() {
     return await performSearch();
   }, [performSearch]);
 
-  // Clear search results
+  // Clear search results - FIXED!
   const clearSearch = useCallback(() => {
     setQuery("");
     setSearchResults([]);
     setPredictions([]);
     setShowDropdown(false);
     setError(null);
+    
+    // Clear any pending debounce timer
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
   }, []);
 
   // Clear search history
@@ -171,11 +183,11 @@ export function useSearch() {
   // Cleanup timer on unmount
   useEffect(() => {
     return () => {
-      if (debounceTimer) {
-        clearTimeout(debounceTimer);
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
       }
     };
-  }, [debounceTimer]);
+  }, []);
 
   return {
     // Search state
