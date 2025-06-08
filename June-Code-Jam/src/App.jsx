@@ -20,12 +20,10 @@ function Home() {
 
 function App() {
   return (
-    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-    </Router>
   );
 }
 

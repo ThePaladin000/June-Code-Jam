@@ -38,13 +38,13 @@ export default function Navbar() {
         </SignedOut>
         <SignedIn>
           {user && (
-            <img
-              src={user.imageUrl}
-              alt="User avatar"
-              title={user.fullName}
-              className="navbar__avatar"
-              onClick={() => navigate("/profile")}
-            />
+        <UserButton 
+        appearance={{
+          elements: {
+            avatarBox: "navbar__avatar" // Use your existing CSS
+          }
+        }}
+      />
           )}
         </SignedIn>
       </div>
