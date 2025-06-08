@@ -7,8 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
+node_modules/
+dist/
 dist-ssr
 *.local
 
@@ -24,5 +24,18 @@ dist-ssr
 *.sw?
 
 *.env
+.env.*
 
 service-account.json
+
+# Firebase local emulators and config
+.firebase/
+.firebaserc.local
+firebase-debug.log
+firebase-debug.*.log
+
+# OS generated files
+Thumbs.db
+
+# Misc
+coverage/
