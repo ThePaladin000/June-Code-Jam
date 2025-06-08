@@ -5,6 +5,10 @@
     {
       "src": "/api/(nearby-parks|place-details)",
       "dest": "api/mapsServer.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
