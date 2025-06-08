@@ -1,5 +1,7 @@
 {
   "version": 2,
   "builds": [{ "src": "api/mapsServer.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/api/(.*)", "dest": "api/mapsServer.js" }]
+  "routes": [
+    { "src": "/api/(nearby-parks|place-details)", "dest": "api/mapsServer.js" }
+  ]
 }
