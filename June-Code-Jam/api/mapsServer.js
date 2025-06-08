@@ -154,7 +154,4 @@ app.get("/api/nearby-parks", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
-  console.log(`Proxy server running on port ${PORT}`);
-});
+export default app;
