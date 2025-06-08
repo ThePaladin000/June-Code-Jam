@@ -2,29 +2,27 @@ import express from "express";
 import fetch from "node-fetch";
 import { GoogleAuth } from "google-auth-library";
 import cors from "cors";
-import path from "path";
 import { fileURLToPath } from "url";
 import "dotenv/config";
 import fs from "fs";
 import path from "path";
 
-// Decode and write the service account file if running in Vercel
-if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-  const serviceAccountPath = "/tmp/service-account.json";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const isProd = process.env.NODE_ENV === "production" || process.env.VERCEL;
+let SERVICE_ACCOUNT_KEY_PATH;
+
+if (isProd && process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+  SERVICE_ACCOUNT_KEY_PATH = "/tmp/service-account.json";
   const json = Buffer.from(
     process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
     "base64"
   ).toString("utf-8");
-  fs.writeFileSync(serviceAccountPath, json);
-  process.env.GOOGLE_APPLICATION_CREDENTIALS = serviceAccountPath;
+  fs.writeFileSync(SERVICE_ACCOUNT_KEY_PATH, json);
+} else {
+  SERVICE_ACCOUNT_KEY_PATH = path.join(__dirname, "../service-account.json");
 }
-
-// For __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Path to your service account key file
-const SERVICE_ACCOUNT_KEY_PATH = "/tmp/service-account.json";
 
 const app = express();
 app.use(cors());
@@ -163,5 +161,12 @@ app.get("/api/nearby-parks", async (req, res) => {
     res.status(500).json({ error: err.message || "Internal server error" });
   }
 });
+
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5001;
+  app.listen(PORT, () => {
+    console.log(`Dev server running on http://localhost:${PORT}`);
+  });
+}
 
 export default app;
