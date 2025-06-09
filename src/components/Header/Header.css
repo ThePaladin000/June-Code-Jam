@@ -1,17 +1,62 @@
 .header__container {
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header__logo {
-  height: 117px;
-  width: 115px;
+  height: 80px;
+  width: 75px;
 }
 
 .header__title {
-  font-size: 50px;
+  font-size: 28px;
   font-family: "CrimsonPro-BoldItalic";
   margin: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media (min-width: 480px) {
+  .header__container {
+    padding: 15px;
+  }
+  
+  .header__logo {
+    height: 95px;
+    width: 90px;
+  }
+  
+  .header__title {
+    font-size: 35px;
+  }
+}
+
+@media (min-width: 768px) {
+  .header__container {
+    padding: 20px;
+  }
+  
+  .header__logo {
+    height: 110px;
+    width: 105px;
+  }
+  
+  .header__title {
+    font-size: 42px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__logo {
+    height: 117px;
+    width: 115px;
+  }
+  
+  .header__title {
+    font-size: 50px;
+  }
 }
