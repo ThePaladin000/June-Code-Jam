@@ -1,5 +1,17 @@
 import React from "react";
+import { FaHeart } from "react-icons/fa";
+import { SignedIn, useUser } from "@clerk/clerk-react";
+import { FaRegHeart } from "react-icons/fa";
+import { userDataService } from "../../utils/userDataService";
 import "./Cards.css";
+
+function handleSavePlace(placeId) {
+  if (!SignedIn) {
+    alert("Please sign in to save places");
+    return;
+  }
+  console.log(placeId);
+}
 
 export default function Cards({ places = [] }) {
   if (!places.length) {
@@ -31,6 +43,12 @@ export default function Cards({ places = [] }) {
             <p style={{ fontSize: 14, color: "#888" }}>
               {place.formatted_address || "No address available"}
             </p>
+            <div
+              className="heart-container"
+              onClick={() => handleSavePlace(place.place_id)}
+            >
+              <FaHeart />
+            </div>
           </div>
         </div>
       ))}
