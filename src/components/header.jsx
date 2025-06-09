@@ -1,5 +1,5 @@
 import Navbar from "./navbar";
-import Logo from "../assets/GreenFindericon.svg";
+// import Logo from "../assets/GreenFindericon.svg";
 import "./header.css";
 
 export default function Header() {

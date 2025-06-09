@@ -10,7 +10,7 @@
   justify-content: center;
   border-radius: 12px;
   box-shadow: none;
-  transition: box-shadow .3s linear;
+  transition: box-shadow 0.3s linear;
   cursor: pointer;
 }
 
@@ -35,7 +35,6 @@
   object-fit: cover;
 }
 
-
 .card-description {
   font-family: "CrimsonPro-BoldItalic";
   font-size: 20px;
@@ -43,9 +42,14 @@
   margin: auto 0;
   max-width: 275px;
   height: 50px;
-  border: 2px solid #A0522D;
+  border: 2px solid #a0522d;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
 
-
+.globe-image {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}

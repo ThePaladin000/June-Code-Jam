@@ -2,7 +2,24 @@ import React from "react";
 
 export default function Cards({ places = [] }) {
   if (!places.length) {
-    return <div className="cards-containers">No places to display.</div>;
+    return (
+      <div
+        className="cards-containers"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "300px",
+        }}
+      >
+        <img
+          src="https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZBNzrJheQ2aqORSW8MCezTibwhEHBFkt7xAcG"
+          alt="No places to display"
+          className="globe-image"
+        />
+      </div>
+    );
   }
   return (
     <div className="cards-containers">

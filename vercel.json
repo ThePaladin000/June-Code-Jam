@@ -14,7 +14,7 @@
       "dest": "api/mapsServer.js"
     },
     {
-      "src": "/((?!api|_next|assets|favicon.ico|robots.txt|.*\\..*).*)",
+      "src": "/((?!api|_next|assets|robots.txt|.*\\..*).*)",
       "dest": "/index.html"
     }
   ]

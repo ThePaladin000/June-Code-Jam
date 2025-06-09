@@ -1,6 +1,8 @@
 import { IoLocationSharp } from "react-icons/io5";
 import "./footer.css";
-import grass from "../assets/grass.jpg";
+// import grass from "../assets/grass.jpg";
+const grassUrl =
+  "https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZFxoxTRXJGv0zHpLdhj4Tmf1ZY5OBKVxN9XD6";
 
 const tree =
   "https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZIdbw8gAjGwgyepxTk47RCPfotcAalOuXUd0E";
@@ -23,7 +25,7 @@ export default function Footer() {
           <div className="footer-contributor-container">
             <a
               href="https://github.com/Buffalo-Crow"
-              style={{ backgroundImage: grass }}
+              style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"
@@ -45,7 +47,7 @@ export default function Footer() {
           <div className="footer-contributor-container">
             <a
               href="https://github.com/TonyRiches17"
-              style={{ backgroundImage: grass }}
+              style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"
@@ -67,7 +69,7 @@ export default function Footer() {
           <div className="footer-contributor-container">
             <a
               href="https://github.com/Majestyk1"
-              style={{ backgroundImage: grass }}
+              style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"
@@ -89,7 +91,7 @@ export default function Footer() {
           <div className="footer-contributor-container">
             <a
               href="https://github.com/ThePaladin000"
-              style={{ backgroundImage: grass }}
+              style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"

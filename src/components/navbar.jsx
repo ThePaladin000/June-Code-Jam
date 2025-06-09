@@ -6,7 +6,6 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 
-import Logo from "../assets/GreenFindericon.svg";
 import { FaHome, FaLocationArrow } from "react-icons/fa";
 import "./navbar.css";
 import { useNavigate } from "react-router-dom";
@@ -31,20 +30,24 @@ export default function Navbar() {
           />
         </SignedIn>
       </div>
-      <img className="navbar__logo" src={Logo} alt="Green Findr Logo" />
+      <img
+        className="navbar__logo"
+        src="https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZlkot58vCy0GJFV1IZ3UXetAnNr4mDQjgHsSa"
+        alt="Green Findr Logo"
+      />
       <div className="navbar-right">
         <SignedOut>
           <SignInButton className="navbar__signin-btn" mode="modal" />
         </SignedOut>
         <SignedIn>
           {user && (
-        <UserButton 
-        appearance={{
-          elements: {
-            avatarBox: "navbar__avatar" // Use your existing CSS
-          }
-        }}
-      />
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "navbar__avatar", // Use your existing CSS
+                },
+              }}
+            />
           )}
         </SignedIn>
       </div>
