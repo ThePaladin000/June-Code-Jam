@@ -1,18 +1,10 @@
 import React from "react";
+import "./Cards.css";
 
 export default function Cards({ places = [] }) {
   if (!places.length) {
     return (
-      <div
-        className="cards-containers"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: "300px",
-        }}
-      >
+      <div className="cards-containers">
         <img
           src="https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZBNzrJheQ2aqORSW8MCezTibwhEHBFkt7xAcG"
           alt="No places to display"
