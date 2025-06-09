@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import "./App.css";
-import Footer from "./components/footer";
-import Search from "./components/search";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import Search from "../Search/Search";
 import { Routes, Route } from "react-router-dom";
-import Profile from "./profile";
-import Cards from "./components/cards";
-import "./components/cards.css";
-import Header from "./components/header";
+import Profile from "../Profile/Profile";
+import Cards from "../Cards/Cards";
+import Header from "../Header/Header";
 
 function Home() {
   const [places, setPlaces] = useState([]);
   return (
     <>
-      <Header />
+      <Navbar />
       <Search onPlacesFetched={setPlaces} />
       <Cards places={places} />
       <Footer />

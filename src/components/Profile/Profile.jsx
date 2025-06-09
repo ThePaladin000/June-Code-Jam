@@ -1,9 +1,8 @@
 import { useState } from "react";
-import "./App.css";
-import Navbar from "./components/navbar";
-import Footer from "./components/footer";
-import Cards from "./components/cards";
-import "./components/cards.css";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import Cards from "../Cards/Cards";
+import "./profile.css";
 
 function Profile() {
   const [count, setCount] = useState(0);
@@ -12,7 +11,7 @@ function Profile() {
     <>
       <Navbar />
       <div className="main-container">
-        <h1>My Green Bucket List</h1>
+        <h1 className="profile__title">MY GREEN BUCKET LIST</h1>
         <Cards />
       </div>
       <Footer />

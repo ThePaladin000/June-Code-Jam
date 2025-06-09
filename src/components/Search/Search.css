@@ -1,8 +1,18 @@
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  flex-direction: column;
+  /* min-height: 100vh; */
+}
+
 .search-form {
   position: relative;
+  display: flex;
   width: 100%;
   max-width: 400px;
-  margin: 0 auto 2rem auto;
+  margin: 0;
   z-index: 20;
 }
 

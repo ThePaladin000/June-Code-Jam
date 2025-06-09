@@ -1,4 +1,5 @@
 .navbar {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,6 +8,7 @@
   padding-top: 20px;
   margin: 0 auto;
   color: #fff;
+  padding-bottom: 30px;
 }
 
 .navbar-left {
@@ -15,7 +17,16 @@
   gap: 1rem;
 }
 
+.navbar__logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 80px;
+  width: 100px;
+}
+
 .navbar-icon {
+  justify-self: center;
   font-size: 1.7rem;
   cursor: pointer;
   transition: color 0.2s;
@@ -27,10 +38,9 @@
 
 .navbar-right {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
 }
-
 .navbar-btn {
   padding: 0.5rem 1.2rem;
   border: none;

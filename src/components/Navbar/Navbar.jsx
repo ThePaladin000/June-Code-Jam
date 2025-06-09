@@ -7,7 +7,7 @@ import {
 } from "@clerk/clerk-react";
 
 import { FaHome, FaLocationArrow } from "react-icons/fa";
-import "./navbar.css";
+import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
