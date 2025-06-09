@@ -13,4 +13,5 @@
 .header__title {
   font-size: 50px;
   font-family: "CrimsonPro-BoldItalic";
+  margin: 0;
 }

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { fetchAutocompleteSuggestions } from "../utils/utils";
+import { fetchAutocompleteSuggestions } from "../../utils/utils";
 import { useUser } from "@clerk/clerk-react";
-import "./search.css";
+import "./Search.css";
+import Header from "../Header/Header";
 
 const SEARCH_LIMIT = 3;
 const STORAGE_KEY = "searches_this_month";
@@ -96,36 +97,43 @@ export default function Search({ onPlacesFetched }) {
   };
 
   return (
-    <div className="search-container">
-      <form className="search-form" autoComplete="off" onSubmit={handleSubmit}>
-        <span className="search-icon">
-          <FaSearch />
-        </span>
-        <input
-          type="text"
-          className="search-input"
-          value={query}
-          onChange={handleChange}
-          onFocus={() => predictions.length && setShowDropdown(true)}
-        />
-        {showDropdown && predictions.length > 0 && (
-          <ul className="autocomplete-dropdown">
-            {predictions.map((p) => (
-              <li
-                key={p.placeId}
-                onMouseDown={() => handleSelect(p.description)}
-                className="autocomplete-item"
-              >
-                <span style={{ fontWeight: "bold" }}>{p.mainText}</span>
-                <span style={{ color: "#888", marginLeft: 4 }}>
-                  {p.secondaryText}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </div>
+    <>
+      <Header />
+      <div className="search-container">
+        <form
+          className="search-form"
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
+          <span className="search-icon">
+            <FaSearch />
+          </span>
+          <input
+            type="text"
+            className="search-input"
+            value={query}
+            onChange={handleChange}
+            onFocus={() => predictions.length && setShowDropdown(true)}
+          />
+          {showDropdown && predictions.length > 0 && (
+            <ul className="autocomplete-dropdown">
+              {predictions.map((p) => (
+                <li
+                  key={p.placeId}
+                  onMouseDown={() => handleSelect(p.description)}
+                  className="autocomplete-item"
+                >
+                  <span style={{ fontWeight: "bold" }}>{p.mainText}</span>
+                  <span style={{ color: "#888", marginLeft: 4 }}>
+                    {p.secondaryText}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </form>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </div>
+    </>
   );
 }

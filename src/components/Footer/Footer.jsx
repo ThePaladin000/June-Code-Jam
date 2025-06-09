@@ -1,5 +1,5 @@
 import { IoLocationSharp } from "react-icons/io5";
-import "./footer.css";
+import "./Footer.css";
 // import grass from "../assets/grass.jpg";
 const grassUrl =
   "https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZFxoxTRXJGv0zHpLdhj4Tmf1ZY5OBKVxN9XD6";
