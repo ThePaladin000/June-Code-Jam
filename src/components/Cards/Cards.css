@@ -1,7 +1,11 @@
 .cards-containers {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   gap: 20px;
+  padding: 20px 10px;
+  box-sizing: border-box;
 }
 
 .card-container {
@@ -12,6 +16,8 @@
   box-shadow: none;
   transition: box-shadow 0.3s linear;
   cursor: pointer;
+  width: 100%;
+  max-width: 280px;
 }
 
 .card-container:hover {
@@ -19,14 +25,15 @@
 }
 
 .card {
-  max-width: 275px;
-  height: 325px;
+  width: 100%;
+  height: 240px;
   border: 2px solid #202c01;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  position: relative;
 }
 
 .card-image {
@@ -37,20 +44,111 @@
 
 .card-description {
   font-family: "CrimsonPro-BoldItalic";
-  font-size: 20px;
-  padding: 0;
-  margin: auto 0;
-  max-width: 275px;
-  height: 50px;
+  font-size: 16px;
+  padding: 8px;
+  margin: 0;
+  width: 100%;
+  height: auto;
+  min-height: 45px;
   border: 2px solid #a0522d;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .globe-image {
   border-radius: 50%;
-  max-width: 250px;
+  max-width: 200px;
   width: 100%;
   height: auto;
   margin: 0 auto;
+}
+
+@media (min-width: 480px) {
+  .cards-containers {
+    gap: 25px;
+    padding: 25px 15px;
+  }
+  
+  .card-container {
+    max-width: 320px;
+  }
+  
+  .card {
+    height: 280px;
+  }
+  
+  .card-description {
+    font-size: 18px;
+    padding: 10px;
+    min-height: 50px;
+  }
+  
+  .globe-image {
+    max-width: 220px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cards-containers {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 30px 20px;
+  }
+  
+  .card-container {
+    max-width: 275px;
+    flex: 0 1 calc(50% - 15px);
+  }
+  
+  .card {
+    height: 300px;
+  }
+  
+  .card-description {
+    font-size: 19px;
+    height: 50px;
+    min-height: auto;
+  }
+  
+  .globe-image {
+    max-width: 240px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards-containers {
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 30px;
+  }
+  
+  .card-container {
+    flex: 0 1 auto;
+  }
+  
+  .card {
+    height: 325px;
+  }
+  
+  .card-description {
+    font-size: 20px;
+  }
+  
+  .globe-image {
+    max-width: 250px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .cards-containers {
+    gap: 40px;
+  }
 }
