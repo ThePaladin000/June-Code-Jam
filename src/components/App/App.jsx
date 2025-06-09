@@ -6,7 +6,8 @@ import Search from "../Search/Search";
 import { Routes, Route } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import Cards from "../Cards/Cards";
-import Header from "../Header/Header";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
 
 function Home() {
   const [places, setPlaces] = useState([]);

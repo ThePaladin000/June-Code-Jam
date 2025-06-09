@@ -1,7 +1,20 @@
 import React from "react";
+import { useState } from "react";
 import "./Cards.css";
+import PlaceModal from "../PlaceModal/PlaceModal";
 
 export default function Cards({ places = [] }) {
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
+  const openModal = (place) => {
+    if (selectedPlace === place) return;
+    setSelectedPlace(place);
+  };
+
+  const closeModal = () => {
+    setSelectedPlace(null);
+  };
+
   if (!places.length) {
     return (
       <div className="cards-containers">
@@ -16,7 +29,12 @@ export default function Cards({ places = [] }) {
   return (
     <div className="cards-containers">
       {places.map((place, idx) => (
-        <div className="card-container" key={place.id || place.place_id || idx}>
+        <div
+          className="card-container"
+          key={place.id || place.place_id || idx}
+          onClick={() => openModal(place)}
+          style={{ cursor: "pointer" }}
+        >
           <div className="card">
             <img
               src={place.photoUrl || "https://placehold.co/600x400"}
@@ -34,6 +52,11 @@ export default function Cards({ places = [] }) {
           </div>
         </div>
       ))}
+      <PlaceModal
+        isOpen={!!selectedPlace}
+        onRequestClose={closeModal}
+        place={selectedPlace}
+      />
     </div>
   );
 }
