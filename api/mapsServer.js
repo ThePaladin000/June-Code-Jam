@@ -6,31 +6,50 @@ import { fileURLToPath } from "url";
 import "dotenv/config";
 import fs from "fs";
 import path from "path";
+import os from "os";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const isProd = process.env.NODE_ENV === "production" || process.env.VERCEL;
-let SERVICE_ACCOUNT_KEY_PATH;
+let auth;
 
 if (isProd && process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-  SERVICE_ACCOUNT_KEY_PATH = "/tmp/service-account.json";
+  const SERVICE_ACCOUNT_KEY_PATH = path.join(
+    os.tmpdir(),
+    "service-account.json"
+  );
   const json = Buffer.from(
     process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
     "base64"
   ).toString("utf-8");
   fs.writeFileSync(SERVICE_ACCOUNT_KEY_PATH, json);
+  auth = new GoogleAuth({
+    keyFile: SERVICE_ACCOUNT_KEY_PATH,
+    scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+  });
+} else if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+  const json = Buffer.from(
+    process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
+    "base64"
+  ).toString("utf-8");
+  auth = new GoogleAuth({
+    credentials: JSON.parse(json),
+    scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+  });
 } else {
-  SERVICE_ACCOUNT_KEY_PATH = path.join(__dirname, "../service-account.json");
+  const SERVICE_ACCOUNT_KEY_PATH = path.join(
+    __dirname,
+    "../service-account.json"
+  );
+  auth = new GoogleAuth({
+    keyFile: SERVICE_ACCOUNT_KEY_PATH,
+    scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+  });
 }
 
 const app = express();
 app.use(cors());
-
-const auth = new GoogleAuth({
-  keyFile: SERVICE_ACCOUNT_KEY_PATH,
-  scopes: ["https://www.googleapis.com/auth/cloud-platform"],
-});
 
 app.get("/api/place-details", async (req, res) => {
   const { placeId } = req.query;
@@ -59,10 +78,8 @@ app.get("/api/place-details", async (req, res) => {
 
     const data = await response.json();
 
-    // Extract the first photo URL if available
     let photoUrl = null;
     if (data.photos && data.photos.length > 0 && data.photos[0].name) {
-      // Construct the photo URL using the v1 API
       photoUrl = `https://places.googleapis.com/v1/${data.photos[0].name}/media?maxWidthPx=600&key=${process.env.VITE_MAPS_API_KEY}`;
     }
 
@@ -82,7 +99,6 @@ app.get("/api/nearby-parks", async (req, res) => {
     const client = await auth.getClient();
     const accessToken = await client.getAccessToken();
 
-    // 1. Get the location of the selected place
     const placeFields = "location";
     const placeUrl = `https://places.googleapis.com/v1/places/${placeId}?fields=${placeFields}`;
     const placeResp = await fetch(placeUrl, {
@@ -100,7 +116,6 @@ app.get("/api/nearby-parks", async (req, res) => {
         .json({ error: "Could not get location for placeId" });
     }
 
-    // 2. Search for nearby parks
     const nearbyUrl = "https://places.googleapis.com/v1/places:searchNearby";
     const body = JSON.stringify({
       includedTypes: ["park"],
@@ -142,7 +157,6 @@ app.get("/api/nearby-parks", async (req, res) => {
       JSON.stringify(parksData, null, 2)
     );
 
-    // 3. Format parks with photo URLs
     const parks = (parksData.places || []).map((park) => {
       let photoUrl = null;
       if (park.photos && park.photos.length > 0 && park.photos[0].name) {
