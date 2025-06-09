@@ -61,20 +61,10 @@ export const userDataService = {
             if (savedPlaceIds.length === 0) {
                 return [];
             }
-            const savedPlaces = [];
-            for (const placeId of savedPlaceIds) {
-                const placeDoc = await getDoc(doc(db, "places", placeId));
-                if (placeDoc.exists()) {
-                    savedPlaces.push({
-                        id: placeDoc.id,
-                        ...placeDoc.data()
-                    });
-                }
-            }      
-            console.log(`Retrieved ${savedPlaces.length} saved places for user ${userId}`);
-            return savedPlaces;
+            return savedPlaceIds;
         } catch (error) {
             handleFirebaseError("getting saved places", error);
+            return [];
         }
     },
     async isPlaceSaved(userId, placeId) {
