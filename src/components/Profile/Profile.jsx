@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
-import "./profile.css";
+import "./Profile.css";
 
 function Profile() {
   const [count, setCount] = useState(0);
