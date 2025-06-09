@@ -24,6 +24,7 @@
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
+  margin-left: 0;
 }
 
 .search-input:focus {
@@ -56,6 +57,10 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  width: calc(100% - 3.5rem);
+  min-width: 0;
+  box-sizing: border-box;
+  left: 2.5rem;
 }
 
 .autocomplete-item {

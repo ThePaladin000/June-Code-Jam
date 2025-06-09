@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import { fetchAutocompleteSuggestions } from "../../utils/utils";
 import { useUser } from "@clerk/clerk-react";
@@ -32,12 +32,15 @@ export default function Search({ onPlacesFetched }) {
   const [selectedPrediction, setSelectedPrediction] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [error, setError] = useState("");
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const { isSignedIn } = useUser();
+  const inputRef = useRef();
 
   const handleChange = async (e) => {
     const value = e.target.value;
     setQuery(value);
     setSelectedPrediction(null);
+    setHighlightedIndex(-1);
     if (value) {
       const results = await fetchAutocompleteSuggestions(value);
       setPredictions(results);
@@ -53,16 +56,36 @@ export default function Search({ onPlacesFetched }) {
     const prediction = predictions.find((p) => p.description === desc);
     setSelectedPrediction(prediction || null);
     setShowDropdown(false);
+    setTimeout(() => {
+      document
+        .querySelector(".search-form")
+        .dispatchEvent(
+          new Event("submit", { cancelable: true, bubbles: true })
+        );
+    }, 0);
   };
 
-  const fetchPlaceDetails = async (placeId) => {
-    const response = await fetch(`/api/place-details?placeId=${placeId}`);
-    if (!response.ok) throw new Error("Failed to fetch place details");
-    return response.json();
+  const handleKeyDown = (e) => {
+    if (!showDropdown || predictions.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setHighlightedIndex((prev) => (prev + 1) % predictions.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setHighlightedIndex(
+        (prev) => (prev - 1 + predictions.length) % predictions.length
+      );
+    } else if (e.key === "Enter") {
+      if (highlightedIndex >= 0 && highlightedIndex < predictions.length) {
+        handleSelect(predictions[highlightedIndex].description);
+        e.preventDefault();
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setShowDropdown(false);
     if (!isSignedIn) {
       const count = getSearchCount();
       if (count >= SEARCH_LIMIT) {
@@ -83,7 +106,6 @@ export default function Search({ onPlacesFetched }) {
         if (onPlacesFetched) onPlacesFetched([]);
         return;
       }
-      // Fetch nearby parks for the selected place
       const response = await fetch(
         `/api/nearby-parks?placeId=${predictionToFetch.placeId}`
       );
