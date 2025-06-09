@@ -88,17 +88,17 @@
     margin: 100px 0 25px;
     padding: 0 15px;
   }
-  
+
   .footer-contributors {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 30px;
   }
-  
+
   .footer-tree {
     width: 45px;
   }
-  
+
   .footer-icon-crow,
   .footer-icon-rich,
   .footer-icon-majestik,
@@ -106,12 +106,12 @@
     left: 55px;
     top: 8px;
   }
-  
+
   .footer-contributor-container {
     width: 130px;
     height: 45px;
   }
-  
+
   .footer-contributor-name {
     font-size: 24px;
     -webkit-text-stroke: 0.4px gray;
@@ -123,16 +123,16 @@
     margin: 150px 0 30px;
     padding: 0 20px;
   }
-  
+
   .footer-contributors {
     flex-wrap: nowrap;
     gap: 60px;
   }
-  
+
   .footer-tree {
     width: 50px;
   }
-  
+
   .footer-icon-crow,
   .footer-icon-rich,
   .footer-icon-majestik,
@@ -140,13 +140,13 @@
     left: 60px;
     top: 8px;
   }
-  
+
   .footer-contributor-container {
     width: 140px;
     height: 48px;
     background-position-y: -16px;
   }
-  
+
   .footer-contributor-name {
     font-size: 28px;
     -webkit-text-stroke: 0.45px gray;
@@ -157,19 +157,19 @@
   .footer {
     margin: 200px 0 30px;
   }
-  
+
   .footer-contributors {
     gap: 80px;
   }
-  
+
   .footer-tree {
     width: 55px;
   }
-  
+
   .footer-tree:hover {
     transform: scale(1.3);
   }
-  
+
   .footer-icon-crow,
   .footer-icon-rich,
   .footer-icon-majestik,
@@ -177,13 +177,13 @@
     left: 65px;
     top: 9px;
   }
-  
+
   .footer-contributor-container {
     width: 145px;
     height: 50px;
     background-position-y: -17px;
   }
-  
+
   .footer-contributor-name {
     font-size: 32px;
     -webkit-text-stroke: 0.5px gray;
@@ -194,22 +194,22 @@
   .footer-contributors {
     gap: 100px;
   }
-  
+
   .footer-tree {
     width: 60px;
   }
-  
+
   .footer-icon-crow,
   .footer-icon-rich,
   .footer-icon-majestik,
   .footer-icon-joshua {
     left: 70px;
   }
-  
+
   .footer-contributor-container {
     width: 150px;
   }
-  
+
   .footer-contributor-name {
     font-size: 35px;
   }
