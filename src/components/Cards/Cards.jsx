@@ -18,6 +18,8 @@ export default function Cards({ places = [] }) {
 
     try {
       const placeId = place.id || place.placeId;
+      const placeName =
+        place.name || place.displayName?.text || "Unknown Place";
 
       if (isPlaceSaved(placeId)) {
         // If already saved, remove it
@@ -25,7 +27,7 @@ export default function Cards({ places = [] }) {
         console.log(`Removed place: ${placeId} for user: ${user.id}`);
       } else {
         // If not saved, save it
-        await saveUserPlaces(placeId);
+        await saveUserPlaces(placeId, placeName);
         console.log(`Saved place: ${placeId} for user: ${user.id}`);
       }
     } catch (error) {
@@ -64,7 +66,7 @@ export default function Cards({ places = [] }) {
                 {place.name || place.displayName?.text || "Unknown Place"}
               </h2>
               <p className="card-address">
-                {place.formatted_address || "No address available"}
+                {place.formatted_address || place.formattedAddress}
               </p>
 
               <SignedIn>

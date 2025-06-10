@@ -135,12 +135,6 @@ app.get("/api/nearby-parks", async (req, res) => {
         },
       },
     });
-    console.log(
-      "Fetching nearby parks for placeId:",
-      placeId,
-      "at",
-      new Date().toISOString()
-    );
     const parksResp = await fetch(nearbyUrl, {
       method: "POST",
       headers: {
@@ -152,10 +146,6 @@ app.get("/api/nearby-parks", async (req, res) => {
       body,
     });
     const parksData = await parksResp.json();
-    console.log(
-      "Nearby parks API response:",
-      JSON.stringify(parksData, null, 2)
-    );
 
     const parks = (parksData.places || []).map((park) => {
       let photoUrl = null;

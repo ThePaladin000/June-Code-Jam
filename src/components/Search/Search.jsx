@@ -5,7 +5,7 @@ import { useUser } from "@clerk/clerk-react";
 import "./Search.css";
 import Header from "../Header/Header";
 
-const SEARCH_LIMIT = 3;
+const SEARCH_LIMIT = 10;
 const STORAGE_KEY = "searches_this_month";
 
 function getMonthKey() {
