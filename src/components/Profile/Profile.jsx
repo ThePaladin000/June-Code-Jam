@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
 import "./Profile.css";
+import Carousel from "../Carousel/Carousel.jsx";
 
 function Profile() {
   const { isSignedIn } = useUser();
@@ -21,8 +22,9 @@ function Profile() {
       setFetchingDetails(true);
 
       try {
-        // Fetch details for each saved place ID
-        const detailsPromises = savedPlaces.map(async (placeId) => {
+        const detailsPromises = savedPlaces.map(async (placeObj) => {
+          const placeId = placeObj.id || placeObj;
+          const placeName = placeObj.name || undefined;
           try {
             const response = await fetch(
               `/api/place-details?placeId=${placeId}`
@@ -30,7 +32,7 @@ function Profile() {
 
             if (response.ok) {
               const data = await response.json();
-              return { ...data, id: placeId };
+              return { ...data, id: placeId, name: placeName };
             } else {
               console.error(`❌ Failed to fetch details for place: ${placeId}`);
               return null;
@@ -117,7 +119,7 @@ function Profile() {
           </div>
         )}
 
-        <Cards places={savedPlaceDetails} />
+        <Carousel places={savedPlaceDetails} />
       </div>
       <Footer />
     </>
