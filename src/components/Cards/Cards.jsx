@@ -3,6 +3,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { SignedIn, useUser, SignedOut } from "@clerk/clerk-react";
 import { useSavedPlaces } from "../../hooks/useSavedPlaces.js";
 import "./Cards.css";
+import PlaceModal from "../PlaceModal/PlaceModal";
 
 export default function Cards({ places = [] }) {
   const { user, isSignedIn } = useUser();
@@ -30,6 +31,7 @@ export default function Cards({ places = [] }) {
       console.error('Error saving/removing place:', error);
     }
   };
+
   if (!places.length) {
     return (
       <div className="cards-containers">
