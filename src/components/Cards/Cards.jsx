@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { SignedIn, useUser, SignedOut } from "@clerk/clerk-react";
 import { useSavedPlaces } from "../../context/SavedPlacesContext.jsx";
+import { QRCodeSVG } from "qrcode.react";
 import "./Cards.css";
 import PlaceModal from "../PlaceModal/PlaceModal";
+import QRCodeModal from "../QRCodeModal/QRCodeModal";
 
 export default function Cards({ places = [] }) {
   const { user, isSignedIn } = useUser();
   const { saveUserPlaces, removeUserPlaces, isPlaceSaved, loading } =
     useSavedPlaces();
+  const [selectedQRCode, setSelectedQRCode] = useState(null);
+
+  const getGoogleMapsUrl = (place) => {
+    const address = place.formatted_address || place.formattedAddress || "";
+    const name = place.name || place.displayName?.text || "Unknown Place";
+    const encodedAddress = encodeURIComponent(`${name}, ${address}`);
+    return `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+  };
 
   const handleSavePlace = async (place) => {
     if (!isSignedIn) {
@@ -51,6 +61,9 @@ export default function Cards({ places = [] }) {
       {places.map((place, idx) => {
         const placeId = place.id || place.placeId;
         const isSaved = isPlaceSaved(placeId);
+        const mapsUrl = getGoogleMapsUrl(place);
+        const placeName =
+          place.name || place.displayName?.text || "Unknown Place";
 
         return (
           <div className="card-container" key={placeId || idx}>
@@ -62,47 +75,73 @@ export default function Cards({ places = [] }) {
               />
             </div>
             <div className="card-info">
-              <h2 className="card-description">
-                {place.name || place.displayName?.text || "Unknown Place"}
-              </h2>
+              <h2 className="card-description">{placeName}</h2>
               <p className="card-address">
                 {place.formatted_address || place.formattedAddress}
               </p>
 
-              <SignedIn>
-                <div className="save-button">
-                  <button
-                    className="heart-button"
-                    onClick={() => handleSavePlace(place)}
-                    disabled={loading}
-                    title={isSaved ? "Remove from saved places" : "Save place"}
-                  >
-                    {isSaved ? (
-                      <FaHeart className="heart-icon filled" />
-                    ) : (
-                      <FaRegHeart className="heart-icon empty" />
-                    )}
-                    {isSaved ? " Saved" : " Save"}
-                  </button>
-                </div>
-              </SignedIn>
+              <div className="card-actions">
+                <SignedIn>
+                  <div className="save-button">
+                    <button
+                      className="heart-button"
+                      onClick={() => handleSavePlace(place)}
+                      disabled={loading}
+                      title={
+                        isSaved ? "Remove from saved places" : "Save place"
+                      }
+                    >
+                      {isSaved ? (
+                        <FaHeart className="heart-icon filled" />
+                      ) : (
+                        <FaRegHeart className="heart-icon empty" />
+                      )}
+                      {isSaved ? " Saved" : " Save"}
+                    </button>
+                  </div>
+                </SignedIn>
 
-              <SignedOut>
-                <div className="save-button">
-                  <button
-                    className="heart-button"
-                    onClick={() => alert("Please sign in to save places")}
-                    title="Sign in to save places"
-                  >
-                    <FaRegHeart className="heart-icon empty" />
-                    Sign In to Save
-                  </button>
+                <SignedOut>
+                  <div className="save-button">
+                    <button
+                      className="heart-button"
+                      onClick={() => alert("Please sign in to save places")}
+                      title="Sign in to save places"
+                    >
+                      <FaRegHeart className="heart-icon empty" />
+                      Sign In to Save
+                    </button>
+                  </div>
+                </SignedOut>
+
+                <div
+                  className="qr-code-container"
+                  title="Click to enlarge QR code"
+                  onClick={() =>
+                    setSelectedQRCode({ url: mapsUrl, name: placeName })
+                  }
+                >
+                  <QRCodeSVG
+                    value={mapsUrl}
+                    size={80}
+                    level="H"
+                    includeMargin={true}
+                    className="qr-code"
+                  />
+                  <span className="qr-label">Click to enlarge</span>
                 </div>
-              </SignedOut>
+              </div>
             </div>
           </div>
         );
       })}
+
+      <QRCodeModal
+        isOpen={!!selectedQRCode}
+        onClose={() => setSelectedQRCode(null)}
+        mapsUrl={selectedQRCode?.url}
+        placeName={selectedQRCode?.name}
+      />
     </div>
   );
 }
