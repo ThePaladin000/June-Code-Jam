@@ -10,14 +10,12 @@
 
 .profile-subtitle-container {
   text-align: center;
-  padding: 60px 20px;
-  color: #888;
   padding: 10px 20px 20px;
   color: #556b2f;
 }
 
 .profile-subtitle {
-  font-size: 18px;
+  font-size: 20px;
   margin: 0;
   font-weight: 500;
 }
