@@ -8,6 +8,17 @@ import PlaceModal from "../PlaceModal/PlaceModal";
 import QRCodeModal from "../QRCodeModal/QRCodeModal";
 
 export default function Cards({ places = [] }) {
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
+  const openModal = (place) => {
+    if (selectedPlace === place) return;
+    setSelectedPlace(place);
+  };
+
+  const closeModal = () => {
+    setSelectedPlace(null);
+  };
+
   const { user, isSignedIn } = useUser();
   const { saveUserPlaces, removeUserPlaces, isPlaceSaved, loading } =
     useSavedPlaces();
@@ -71,6 +82,7 @@ export default function Cards({ places = [] }) {
               <img
                 src={place.photoUrl || "https://placehold.co/600x400"}
                 alt={place.name || "Place"}
+                onClick={() => openModal(place)}
                 className="card-image"
               />
             </div>
@@ -135,12 +147,10 @@ export default function Cards({ places = [] }) {
           </div>
         );
       })}
-
-      <QRCodeModal
-        isOpen={!!selectedQRCode}
-        onClose={() => setSelectedQRCode(null)}
-        mapsUrl={selectedQRCode?.url}
-        placeName={selectedQRCode?.name}
+      <PlaceModal
+        isOpen={!!selectedPlace}
+        onRequestClose={closeModal}
+        place={selectedPlace}
       />
     </div>
   );
