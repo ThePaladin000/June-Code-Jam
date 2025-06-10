@@ -131,7 +131,7 @@ app.get("/api/nearby-parks", async (req, res) => {
       locationRestriction: {
         circle: {
           center: { latitude, longitude },
-          radius: 20000,
+          radius: 10000,
         },
       },
     });
