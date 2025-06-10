@@ -145,8 +145,10 @@ export default function Search({ onPlacesFetched }) {
                   onMouseDown={() => handleSelect(p.description)}
                   className="autocomplete-item"
                 >
-                  <span style={{ fontWeight: "bold" }}>{p.mainText}</span>
-                  <span style={{ color: "#888", marginLeft: 4 }}>
+                  <span className="autocomplete-suggestion-main">
+                    {p.mainText}
+                  </span>
+                  <span className="autocomplete-suggestion-secondary">
                     {p.secondaryText}
                   </span>
                 </li>

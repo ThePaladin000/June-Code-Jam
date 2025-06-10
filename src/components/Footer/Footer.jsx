@@ -14,17 +14,20 @@ export default function Footer() {
       <div className="footer-contributors">
         <div className="footer-contributor">
           <div title="Link to Crow's favorite park" className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree" />  <div>
+            <img src={tree} alt="Drawing of a tree" className="footer-tree" />{" "}
+            <div>
               {/* <IoLocationSharp
                 className="footer-icon-crow"
                 title="contributor-icon"
               /> */}
             </div>
           </div>
-          <div title="Link to Crow's GitHub" className="footer-contributor-container">
+          <div
+            title="Link to Crow's GitHub"
+            className="footer-contributor-container"
+          >
             <a
               href="https://github.com/Buffalo-Crow"
-              // style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"
@@ -43,10 +46,12 @@ export default function Footer() {
               /> */}
             </div>
           </div>
-          <div title="Link to Ri₵h's GitHub" className="footer-contributor-container">
+          <div
+            title="Link to Ri₵h's GitHub"
+            className="footer-contributor-container"
+          >
             <a
               href="https://github.com/TonyRiches17"
-              // style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"
@@ -65,10 +70,12 @@ export default function Footer() {
               /> */}
             </div>
           </div>
-          <div title="Link to Majestik's GitHub" className="footer-contributor-container">
+          <div
+            title="Link to Majestik's GitHub"
+            className="footer-contributor-container"
+          >
             <a
               href="https://github.com/Majestyk1"
-              // style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"
@@ -87,10 +94,12 @@ export default function Footer() {
               /> */}
             </div>
           </div>
-          <div title="Link to Joshua's GitHub" className="footer-contributor-container">
+          <div
+            title="Link to Joshua's GitHub"
+            className="footer-contributor-container"
+          >
             <a
               href="https://github.com/ThePaladin000"
-              // style={{ backgroundImage: `url(${grassUrl})` }}
               className="footer-contributor-name"
               target="_blank"
               rel="noopener noreferrer"
