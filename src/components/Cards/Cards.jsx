@@ -17,7 +17,7 @@ export default function Cards({ places = [] }) {
 
     try {
       const placeId = place.id || place.placeId;
-      
+
       if (isPlaceSaved(placeId)) {
         // If already saved, remove it
         await removeUserPlaces(placeId);
@@ -48,7 +48,7 @@ export default function Cards({ places = [] }) {
       {places.map((place, idx) => {
         const placeId = place.id || place.placeId;
         const isSaved = isPlaceSaved(placeId);
-        
+
         return (
           <div className="card-container" key={placeId || idx}>
             <div className="card">
@@ -65,13 +65,13 @@ export default function Cards({ places = [] }) {
               <p style={{ fontSize: 14, color: "#888" }}>
                 {place.formatted_address || "No address available"}
               </p>
-              
+
               <SignedIn>
                 <div className="save-button">
-                  <button 
-                    className="heart-button" 
+                  <button
+                    className="heart-button"
                     onClick={() => handleSavePlace(place)}
-                    disabled={loading} 
+                    disabled={loading}
                     title={isSaved ? "Remove from saved places" : "Save place"}
                   >
                     {isSaved ? (
@@ -86,8 +86,8 @@ export default function Cards({ places = [] }) {
 
               <SignedOut>
                 <div className="save-button">
-                  <button 
-                    className="heart-button" 
+                  <button
+                    className="heart-button"
                     onClick={() => alert("Please sign in to save places")}
                     title="Sign in to save places"
                   >
