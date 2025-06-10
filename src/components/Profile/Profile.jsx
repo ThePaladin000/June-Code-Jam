@@ -13,6 +13,7 @@ function Profile() {
   const [savedPlaceDetails, setSavedPlaceDetails] = useState([]);
   const [fetchingDetails, setFetchingDetails] = useState(false);
   const [ currentIndex, setCurrentIndex ] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const fetchPlaceDetails = async () => {
@@ -78,6 +79,7 @@ function Profile() {
       }
 
       const goToSlide = (index) => {
+        console.log('goToSlide', index);
         setCurrentIndex(index);
       }
 
@@ -140,15 +142,20 @@ function Profile() {
 
             {/* ✨ PAGINATION DOTS */}
             {savedPlaceDetails.length > 1 && (
-              <div className="carousel-dots">
-                {savedPlaceDetails.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
-                    onClick={() => goToSlide(index)}
-                  />
-                ))}
-              </div>
+             <div className="carousel-dots">
+             {savedPlaceDetails.map((_, index) => (
+               <button
+                 key={index}
+                 className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
+                 onClick={() => {
+                  goToSlide(index);
+                 }}
+                 style={{
+                  backgroundColor: index === currentIndex ? 'white' : 'rgba(255, 255, 255, 0.4)'
+                 }}
+               />
+             ))}
+           </div>
             )}
           </div>
         )}
