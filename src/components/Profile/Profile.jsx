@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { useSavedPlaces } from "../../hooks/useSavedPlaces.js";
+import { useSavedPlaces } from "../../context/SavedPlacesContext.jsx";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
 import "./Profile.css";
-import Carousel from "../Carousel/Carousel.jsx";
+// import Carousel from "../Carousel/Carousel.jsx";
 
 function Profile() {
   const { isSignedIn } = useUser();
   const { savedPlaces, loading, error } = useSavedPlaces();
   const [savedPlaceDetails, setSavedPlaceDetails] = useState([]);
   const [fetchingDetails, setFetchingDetails] = useState(false);
+  const [ currentIndex, setCurrentIndex ] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const fetchPlaceDetails = async () => {
@@ -34,7 +36,7 @@ function Profile() {
               const data = await response.json();
               return { ...data, id: placeId, name: placeName };
             } else {
-              console.error(`❌ Failed to fetch details for place: ${placeId}`);
+              console.error(`Failed to fetch details for place: ${placeId}`);
               return null;
             }
           } catch (error) {
@@ -64,65 +66,102 @@ function Profile() {
     }
   }, [savedPlaces, isSignedIn]);
 
+      const handleNext = () => {
+        setCurrentIndex((prevIndex) =>  
+        prevIndex === savedPlaceDetails.length -1 ? 0 : prevIndex + 1
+        );
+      }
+
+      const handlePrev = () => {
+        setCurrentIndex((prevIndex) => 
+          prevIndex === 0 ? savedPlaceDetails.length - 1 : prevIndex - 1
+        );
+      }
+
+      const goToSlide = (index) => {
+        console.log('goToSlide', index);
+        setCurrentIndex(index);
+      }
+
   if (!isSignedIn) {
-    return (
-      <>
-        <Navbar />
-        <div className="main-container">
-          <h1 className="profile__title">MY GREEN BUCKET LIST</h1>
-          <div className="profile-subtitle-container">
-            <p className="profile-subtitle">
-              Please sign in to view your saved places
-            </p>
-          </div>
-        </div>
-        <Footer />
-      </>
-    );
+    return <div>Please sign in to view your saved places</div>
   }
 
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="main-container">
-        <h1 className="profile__title">MY GREEN BUCKET LIST</h1>
-        {(loading || fetchingDetails) && (
-          <div className="profile-subtitle-container">
-            <p className="profile-subtitle">Loading your saved places...</p>
+      <div className="profile-container">
+        <h1>MY GREEN BUCKET LIST</h1>
+        
+        {savedPlaceDetails.length === 0 ? (
+          <div className="empty-state">
+            <p>No saved places yet!</p>
+            <p>Search for places on the home page and click the heart to save them here.</p>
+          </div>
+        ) : (
+          <div className="carousel-section">
+            <p>You have {savedPlaceDetails.length} saved place{savedPlaceDetails.length !== 1 ? 's' : ''}</p>
+            
+            {/* ✨ CAROUSEL CONTAINER */}
+            <div className="carousel-container">
+              
+              {/* LEFT ARROW */}
+              <button 
+                className="carousel-arrow carousel-arrow-left"
+                onClick={handlePrev}
+                disabled={savedPlaceDetails.length <= 1}
+              >
+                ←
+              </button>
+
+              {/* CAROUSEL CONTENT */}
+              <div className="carousel-viewport">
+                <div 
+                  className="carousel-track"
+                  style={{
+                    transform: `translateX(-${currentIndex * 100}%)`
+                  }}
+                >
+                  {savedPlaceDetails.map((place, index) => (
+                    <div key={place.id || index} className="carousel-slide">
+                      <Cards places={[place]} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* RIGHT ARROW */}
+              <button 
+                className="carousel-arrow carousel-arrow-right"
+                onClick={handleNext}
+                disabled={savedPlaceDetails.length <= 1}
+              >
+                →
+              </button>
+            </div>
+
+            {/* ✨ PAGINATION DOTS */}
+            {savedPlaceDetails.length > 1 && (
+             <div className="carousel-dots">
+             {savedPlaceDetails.map((_, index) => (
+               <button
+                 key={index}
+                 className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
+                 onClick={() => {
+                  goToSlide(index);
+                 }}
+                 style={{
+                  backgroundColor: index === currentIndex ? 'white' : 'rgba(255, 255, 255, 0.4)'
+                 }}
+               />
+             ))}
+           </div>
+            )}
           </div>
         )}
-
-        {error && (
-          <div className="error-container">
-            <p className="error-subtitle">
-              Error loading saved places: {error}
-            </p>
-          </div>
-        )}
-
-        {!loading && !fetchingDetails && savedPlaceDetails.length > 0 && (
-          <div className="profile-subtitle-container">
-            <p className="profile-subtitle">
-              You have {savedPlaceDetails.length} saved place
-              {savedPlaceDetails.length !== 1 ? "s" : ""}
-            </p>
-          </div>
-        )}
-
-        {!loading && !fetchingDetails && savedPlaces.length === 0 && (
-          <div className="profile-subtitle-container">
-            <p className="profile-subtitle">Your Bucket is Empty!</p>
-            <p className="profile-subtitle">
-              Search for places on the home page and click the ♥ to save them
-              here.
-            </p>
-          </div>
-        )}
-
-        <Carousel places={savedPlaceDetails} />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
