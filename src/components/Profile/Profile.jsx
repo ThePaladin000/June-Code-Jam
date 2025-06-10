@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
 import "./Profile.css";
+import Carousel from "../Carousel/Carousel.jsx";
 
 function Profile() {
   const { isSignedIn } = useUser();
@@ -117,7 +118,7 @@ function Profile() {
           </div>
         )}
 
-        <Cards places={savedPlaceDetails} />
+        <Carousel places={savedPlaceDetails} />
       </div>
       <Footer />
     </>
