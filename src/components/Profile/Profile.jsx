@@ -111,10 +111,10 @@ function Profile() {
 
         {!loading && !fetchingDetails && savedPlaces.length === 0 && (
           <div className="profile-subtitle-container">
-            <p className="profile-subtitle">No saved places yet!</p>
+            <p className="profile-subtitle">Your Bucket is Empty!</p>
             <p className="profile-subtitle">
-              Search for places on the home page and click the heart to save
-              them here.
+              Search for places on the home page and click the ♥ to save them
+              here.
             </p>
           </div>
         )}

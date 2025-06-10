@@ -7,6 +7,8 @@ import { Routes, Route } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import Cards from "../Cards/Cards";
 import Modal from "react-modal";
+import ModalTest from "../TestConfirm";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 Modal.setAppElement("#root");
 
 function Home() {
