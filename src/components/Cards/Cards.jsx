@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { SignedIn, useUser, SignedOut } from "@clerk/clerk-react";
-import { useState } from "react";
 import { useSavedPlaces } from "../../context/SavedPlacesContext.jsx";
 import { QRCodeSVG } from "qrcode.react";
 import "./Cards.css";
