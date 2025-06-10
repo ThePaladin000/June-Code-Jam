@@ -24,7 +24,7 @@ export default function PlaceModal({ isOpen, onRequestClose, place }) {
           {place.name || place.displayName?.text || "Unknown Place"}
         </h2>
         <p className="place__modal_address">
-          {place.formatted_address || "No address available"}
+          {place.formatted_address || place.formattedAddress}
         </p>
         {/* Add qr code, reviews or other information here and a remove bucket option ect*/}
         <button className="place__modal_close-btn" onClick={onRequestClose}>
