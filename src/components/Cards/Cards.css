@@ -95,6 +95,10 @@
   color: #e74c3c;
 }
 
+.heart-button {
+  background-color: rgba(200, 200, 200, .9);
+}
+
 @media (min-width: 480px) {
   .cards-containers {
     gap: 25px;

@@ -67,13 +67,13 @@ function Profile() {
   }, [savedPlaces, isSignedIn]);
 
       const handleNext = () => {
-        setCurrentIndex((prevIndex) =>  
+        setCurrentIndex((prevIndex) =>
         prevIndex === savedPlaceDetails.length -1 ? 0 : prevIndex + 1
         );
       }
 
       const handlePrev = () => {
-        setCurrentIndex((prevIndex) => 
+        setCurrentIndex((prevIndex) =>
           prevIndex === 0 ? savedPlaceDetails.length - 1 : prevIndex - 1
         );
       }
@@ -91,22 +91,22 @@ function Profile() {
     <div>
       <Navbar />
       <div className="profile-container">
-        <h1>MY GREEN BUCKET LIST</h1>
-        
+        <h1 className="profile-title">MY GREEN BUCKET LIST</h1>
+
         {savedPlaceDetails.length === 0 ? (
           <div className="empty-state">
-            <p>No saved places yet!</p>
-            <p>Search for places on the home page and click the heart to save them here.</p>
+            <p className="profile-text">No saved places yet!</p>
+            <p className="profile-text">Search for places on the home page and click the heart to save them here.</p>
           </div>
         ) : (
           <div className="carousel-section">
-            <p>You have {savedPlaceDetails.length} saved place{savedPlaceDetails.length !== 1 ? 's' : ''}</p>
-            
+            <p className="carousel-section-text">You have {savedPlaceDetails.length} saved place{savedPlaceDetails.length !== 1 ? 's' : ''}</p>
+
             {/* ✨ CAROUSEL CONTAINER */}
             <div className="carousel-container">
-              
+
               {/* LEFT ARROW */}
-              <button 
+              <button
                 className="carousel-arrow carousel-arrow-left"
                 onClick={handlePrev}
                 disabled={savedPlaceDetails.length <= 1}
@@ -116,7 +116,7 @@ function Profile() {
 
               {/* CAROUSEL CONTENT */}
               <div className="carousel-viewport">
-                <div 
+                <div
                   className="carousel-track"
                   style={{
                     transform: `translateX(-${currentIndex * 100}%)`
@@ -131,7 +131,7 @@ function Profile() {
               </div>
 
               {/* RIGHT ARROW */}
-              <button 
+              <button
                 className="carousel-arrow carousel-arrow-right"
                 onClick={handleNext}
                 disabled={savedPlaceDetails.length <= 1}
@@ -151,7 +151,7 @@ function Profile() {
                   goToSlide(index);
                  }}
                  style={{
-                  backgroundColor: index === currentIndex ? 'white' : 'rgba(255, 255, 255, 0.4)'
+                  backgroundColor: index === currentIndex ? 'rgba(230, 230, 230, .9)' : 'rgba(100, 100, 100, .9)'
                  }}
                />
              ))}
