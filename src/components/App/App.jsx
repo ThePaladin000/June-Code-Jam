@@ -3,7 +3,7 @@ import "./App.css";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Search from "../Search/Search";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import Cards from "../Cards/Cards";
 import Modal from "react-modal";
@@ -28,6 +28,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

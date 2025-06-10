@@ -1,56 +1,120 @@
-.profile__title {
-  font-family: "CrimsonPro-BoldItalic";
-  font-size: 28px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  text-align: center;
-  line-height: 1.2;
+
+/* 1. FIX CONTAINER ALIGNMENT */
+.carousel-section {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ← Centers everything */
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 0 10px;
+  box-sizing: border-box;
 }
 
-.profile-subtitle-container {
+/* 2. FIX CAROUSEL VIEWPORT */
+.carousel-viewport {
+  width: 100%;
+  max-width: 300px; /* ← REDUCED from 320px */
+  overflow: hidden;
+  border-radius: 12px;
+  touch-action: pan-x;
+  margin: 0 auto;
+  box-sizing: border-box;
+  scroll-snap-type: x mandatory; /* ← Added directly here */
+}
+
+/* 3. FIX CAROUSEL TRACK */
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%; /* ← This should match viewport exactly */
+  max-width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 10px; /* ← Small padding for breathing room */
+  scroll-snap-align: center; /* ← Added directly here */
+}
+
+/* 4. FIX TEXT ALIGNMENT */
+.carousel-text, 
+.saved-places-text {
   text-align: center;
-  padding: 10px 20px 20px;
-  color: #556b2f;
+  width: 100%;
+  margin: 0 auto 20px auto;
+  padding: 0 15px; /* ← Moves text 5px left effectively */
+  transform: translateX(-5px); /* ← Precise 5px left adjustment */
 }
 
-.profile-subtitle {
-  font-size: 20px;
-  margin: 0;
-  font-weight: 500;
+/* 5. FIX CARD POSITIONING */
+.carousel-slide .card-container {
+  width: 100%;
+  max-width: 280px; /* ← Slightly smaller than viewport */
+  margin: 0 auto;
+  flex: none;
+  box-sizing: border-box;
 }
 
-.error-container {
-  text-align: center;
-  padding: 40px 20px;
-  color: #e74c3c;
-}
 
-.error-subtitle {
-  font-size: 16px;
-  margin: 0;
-}
-
+/* Tablet View - 480px+ */
 @media (min-width: 480px) {
-  .profile__title {
-    font-size: 35px;
-    margin-bottom: 25px;
-    padding: 0 15px;
+  .carousel-viewport {
+    max-width: 400px;
+  }
+  
+  .carousel-slide .card-container {
+    max-width: 350px;
   }
 }
 
+/* Desktop View - 768px+ */
 @media (min-width: 768px) {
-  .profile__title {
-    font-size: 42px;
-    margin-bottom: 30px;
-    padding: 0 20px;
+  .carousel-container {
+    max-width: 800px; /* ← Prevents desktop push-left issue */
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .carousel-viewport {
+    max-width: 500px;
+  }
+  
+  .carousel-slide .card-container {
+    max-width: 450px;
+    transform: translateX(0); /* ← Reset transform on desktop */
+    margin: 0 auto;
+  }
+  
+  .carousel-text, 
+  .saved-places-text {
+    transform: translateX(-5px); /* ← Keep text adjustment */
+    max-width: 500px;
+    margin: 0 auto 20px auto;
   }
 }
 
+/* Large Desktop - 1024px+ */
 @media (min-width: 1024px) {
-  .profile__title {
-    font-size: 50px;
-    margin-top: 0;
-    padding: 0;
+  .carousel-container {
+    max-width: 1000px;
+  }
+  
+  .carousel-viewport {
+    max-width: 600px;
   }
 }
