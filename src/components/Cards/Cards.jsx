@@ -7,7 +7,8 @@ import PlaceModal from "../PlaceModal/PlaceModal";
 
 export default function Cards({ places = [] }) {
   const { user, isSignedIn } = useUser();
-  const { saveUserPlaces, removeUserPlaces, isPlaceSaved, loading } = useSavedPlaces();
+  const { saveUserPlaces, removeUserPlaces, isPlaceSaved, loading } =
+    useSavedPlaces();
 
   const handleSavePlace = async (place) => {
     if (!isSignedIn) {
@@ -17,7 +18,7 @@ export default function Cards({ places = [] }) {
 
     try {
       const placeId = place.id || place.placeId;
-      
+
       if (isPlaceSaved(placeId)) {
         // If already saved, remove it
         await removeUserPlaces(placeId);
@@ -28,7 +29,7 @@ export default function Cards({ places = [] }) {
         console.log(`Saved place: ${placeId} for user: ${user.id}`);
       }
     } catch (error) {
-      console.error('Error saving/removing place:', error);
+      console.error("Error saving/removing place:", error);
     }
   };
 
@@ -48,7 +49,7 @@ export default function Cards({ places = [] }) {
       {places.map((place, idx) => {
         const placeId = place.id || place.placeId;
         const isSaved = isPlaceSaved(placeId);
-        
+
         return (
           <div className="card-container" key={placeId || idx}>
             <div className="card">
@@ -62,20 +63,20 @@ export default function Cards({ places = [] }) {
               <h2 className="card-description">
                 {place.name || place.displayName?.text || "Unknown Place"}
               </h2>
-              <p style={{ fontSize: 14, color: "#888" }}>
+              <p className="card-address">
                 {place.formatted_address || "No address available"}
               </p>
-              
+
               <SignedIn>
                 <div className="save-button">
-                  <button 
-                    className="heart-button" 
+                  <button
+                    className="heart-button"
                     onClick={() => handleSavePlace(place)}
-                    disabled={loading} 
+                    disabled={loading}
                     title={isSaved ? "Remove from saved places" : "Save place"}
                   >
                     {isSaved ? (
-                      <FaHeart className="heart-icon filled" style={{ color: '#e74c3c' }} />
+                      <FaHeart className="heart-icon filled" />
                     ) : (
                       <FaRegHeart className="heart-icon empty" />
                     )}
@@ -86,8 +87,8 @@ export default function Cards({ places = [] }) {
 
               <SignedOut>
                 <div className="save-button">
-                  <button 
-                    className="heart-button" 
+                  <button
+                    className="heart-button"
                     onClick={() => alert("Please sign in to save places")}
                     title="Sign in to save places"
                   >
@@ -103,5 +104,3 @@ export default function Cards({ places = [] }) {
     </div>
   );
 }
-
-

@@ -8,6 +8,31 @@
   padding: 0 10px;
 }
 
+.profile-subtitle-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+  padding: 10px 20px 20px;
+  color: #556b2f;
+}
+
+.profile-subtitle {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.error-container {
+  text-align: center;
+  padding: 40px 20px;
+  color: #e74c3c;
+}
+
+.error-subtitle {
+  font-size: 16px;
+  margin: 0;
+}
+
 @media (min-width: 480px) {
   .profile__title {
     font-size: 35px;

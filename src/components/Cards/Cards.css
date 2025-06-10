@@ -1,10 +1,12 @@
 @keyframes logo-spin {
-  0% {transform: rotate(0deg);}
+  0% {
+    transform: rotate(0deg);
+  }
 
-  100% {transform: rotate(360deg);}
-
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
 
 .cards-containers {
   display: flex;
@@ -68,6 +70,11 @@
   justify-content: center;
 }
 
+.card-image {
+  font-size: 14px;
+  color: #888;
+}
+
 .globe-image {
   border-radius: 50%;
   max-width: 200px;
@@ -75,6 +82,10 @@
   height: auto;
   margin: 0 auto;
   animation: logo-spin 20s linear infinite;
+}
+
+.heart-icon .filled {
+  color: #e74c3c;
 }
 
 @media (min-width: 480px) {
