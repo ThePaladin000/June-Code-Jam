@@ -30,10 +30,11 @@
   font-size: 1.7rem;
   cursor: pointer;
   transition: color 0.2s;
+  color: #556b2f;
 }
 
 .navbar-icon:hover {
-  color: #556b2f;
+  color: #a0522d;
 }
 
 .navbar-right {
@@ -54,6 +55,11 @@
 }
 .navbar__signin-btn {
   font-family: "CrimsonPro-BoldItalic";
+  letter-spacing: 1px;
+  font-size: 17px;
+  border: 1px solid gray;
+  color: #f9f9f9;
+  background-color: #556b2f;
 }
 
 .navbar-btn:hover {
@@ -74,25 +80,25 @@
   .navbar-left {
     gap: 1rem;
   }
-  
+
   .navbar__logo {
     height: 60px;
     width: 75px;
   }
-  
+
   .navbar-icon {
     font-size: 1.5rem;
   }
-  
+
   .navbar-right {
     gap: 1rem;
   }
-  
+
   .navbar-btn {
     padding: 0.45rem 1rem;
     font-size: 0.9rem;
   }
-  
+
   .navbar__avatar {
     height: 50px;
     width: 50px;
@@ -103,21 +109,21 @@
   .navbar {
     padding: 20px 30px 30px;
   }
-  
+
   .navbar__logo {
     height: 70px;
     width: 85px;
   }
-  
+
   .navbar-icon {
     font-size: 1.6rem;
   }
-  
+
   .navbar-btn {
     padding: 0.5rem 1.2rem;
     font-size: 1rem;
   }
-  
+
   .navbar__avatar {
     height: 55px;
     width: 55px;
@@ -129,16 +135,16 @@
     max-width: 1280px;
     margin: 0 auto;
   }
-  
+
   .navbar__logo {
     height: 80px;
     width: 100px;
   }
-  
+
   .navbar-icon {
     font-size: 1.7rem;
   }
-  
+
   .navbar__avatar {
     height: 60px;
     width: 60px;
