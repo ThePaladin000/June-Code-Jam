@@ -1,0 +1,77 @@
+.qr-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 90vw;
+  width: 400px;
+  outline: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.qr-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.qr-modal-content h2 {
+  margin: 0;
+  color: #333;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.qr-code-wrapper {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code-large {
+  display: block;
+}
+
+.close-button {
+  padding: 0.75rem 2rem;
+  background-color: #556b2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: #6b8c3a;
+}
+
+@media (max-width: 480px) {
+  .qr-modal {
+    width: 95vw;
+    padding: 1.5rem;
+  }
+
+  .qr-modal-content h2 {
+    font-size: 1.2rem;
+  }
+}

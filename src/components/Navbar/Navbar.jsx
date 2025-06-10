@@ -44,7 +44,9 @@ export default function Navbar() {
             <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "navbar__avatar", // Use your existing CSS
+                  avatarBox: "navbar__avatar",
+                  userButtonAvatar: "navbar__avatar-image",
+                  userButtonTrigger: "navbar__avatar-trigger",
                 },
               }}
             />

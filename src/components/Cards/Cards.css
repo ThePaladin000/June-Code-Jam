@@ -36,7 +36,6 @@
 .card-container:hover {
   box-shadow: 1px 1px 20px 15px rgb(32, 44, 1, 1);
   border: 4px solid #a0522d;
-
 }
 
 .card {
@@ -96,7 +95,41 @@
 }
 
 .heart-button {
-  background-color: rgba(200, 200, 200, .9);
+  background-color: rgba(200, 200, 200, 0.9);
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.qr-code-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.qr-code-container:hover {
+  transform: scale(1.05);
+}
+
+.qr-code {
+  background: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.qr-label {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
 }
 
 @media (min-width: 480px) {
@@ -181,5 +214,16 @@
 @media (min-width: 1280px) {
   .cards-containers {
     gap: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .qr-code-container {
+    margin-top: 1rem;
   }
 }
