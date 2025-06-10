@@ -1,0 +1,87 @@
+.carousel {
+  position: relative;
+}
+
+.carousel__window {
+  width: 60vw;
+  height: 450px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  list-style-type: none;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  border: 4px solid #4a6602;
+  border-radius: 50%;
+  background: radial-gradient(rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 1) 100%);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__card {
+  width: 275px;
+  height: 400px;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid #4a6602;
+  box-shadow: none;
+  transition: box-shadow 0.3s linear;
+  cursor: pointer;
+}
+
+.carousel__card:hover {
+  box-shadow: 0px 0px 15px 5px #a0522d;
+}
+
+.carousel__card:nth-child(1) {
+  visibility: hidden;
+}
+
+.carousel__card:last-child {
+  visibility: hidden;
+}
+
+.carousel__card-image {
+  width: 275;
+  height: 325px;
+  object-fit: cover;
+}
+
+.carousel__card-location {
+  width: 275;
+  height: 75px;
+  border-top: 2px solid #4a6602;
+  font-family: "CrimsonPro-BoldItalic";
+  font-size: 20px;
+  padding: 8px;
+  margin: 0;
+  background-color: #a0522d;
+}
+
+.carousel__left-button {
+  width: 0;
+  height: 0;
+  border-bottom: 45px solid transparent;
+  border-top: 45px solid transparent;
+  border-right: 90px solid #4a6602;
+  position: absolute;
+  top: 215px;
+  left: -125px;
+}
+
+.carousel__right-button {
+  width: 0;
+  height: 0;
+  border-bottom: 45px solid transparent;
+  border-top: 45px solid transparent;
+  border-left: 90px solid #4a6602;
+  position: absolute;
+  top: 215px;
+  right: -125px;
+}
