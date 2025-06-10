@@ -5,15 +5,14 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
 import "./Profile.css";
-// import Carousel from "../Carousel/Carousel.jsx";
 
 function Profile() {
   const { isSignedIn } = useUser();
-  const { savedPlaces, loading, error } = useSavedPlaces();
+  const { savedPlaces } = useSavedPlaces();
   const [savedPlaceDetails, setSavedPlaceDetails] = useState([]);
-  const [fetchingDetails, setFetchingDetails] = useState(false);
-  const [ currentIndex, setCurrentIndex ] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [, setFetchingDetails] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSlide] = useState(0);
 
   useEffect(() => {
     const fetchPlaceDetails = async () => {
@@ -64,27 +63,27 @@ function Profile() {
     } else {
       setSavedPlaceDetails([]);
     }
-  }, [savedPlaces, isSignedIn]);
+  }, [savedPlaces, isSignedIn, setFetchingDetails]);
 
-      const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-        prevIndex === savedPlaceDetails.length -1 ? 0 : prevIndex + 1
-        );
-      }
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === savedPlaceDetails.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
-      const handlePrev = () => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === 0 ? savedPlaceDetails.length - 1 : prevIndex - 1
-        );
-      }
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? savedPlaceDetails.length - 1 : prevIndex - 1
+    );
+  };
 
-      const goToSlide = (index) => {
-        console.log('goToSlide', index);
-        setCurrentIndex(index);
-      }
+  const goToSlide = (index) => {
+    console.log("goToSlide", index);
+    setCurrentIndex(index);
+  };
 
   if (!isSignedIn) {
-    return <div>Please sign in to view your saved places</div>
+    return <div>Please sign in to view your saved places</div>;
   }
 
   return (
@@ -96,15 +95,20 @@ function Profile() {
         {savedPlaceDetails.length === 0 ? (
           <div className="empty-state">
             <p className="profile-text">No saved places yet!</p>
-            <p className="profile-text">Search for places on the home page and click the heart to save them here.</p>
+            <p className="profile-text">
+              Search for places on the home page and click the heart to save
+              them here.
+            </p>
           </div>
         ) : (
           <div className="carousel-section">
-            <p className="carousel-section-text">You have {savedPlaceDetails.length} saved place{savedPlaceDetails.length !== 1 ? 's' : ''}</p>
+            <p className="carousel-section-text">
+              You have {savedPlaceDetails.length} saved place
+              {savedPlaceDetails.length !== 1 ? "s" : ""}
+            </p>
 
             {/* ✨ CAROUSEL CONTAINER */}
             <div className="carousel-container">
-
               {/* LEFT ARROW */}
               <button
                 className="carousel-arrow carousel-arrow-left"
@@ -119,7 +123,7 @@ function Profile() {
                 <div
                   className="carousel-track"
                   style={{
-                    transform: `translateX(-${currentIndex * 100}%)`
+                    transform: `translateX(-${currentIndex * 100}%)`,
                   }}
                 >
                   {savedPlaceDetails.map((place, index) => (
@@ -142,20 +146,25 @@ function Profile() {
 
             {/* ✨ PAGINATION DOTS */}
             {savedPlaceDetails.length > 1 && (
-             <div className="carousel-dots">
-             {savedPlaceDetails.map((_, index) => (
-               <button
-                 key={index}
-                 className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
-                 onClick={() => {
-                  goToSlide(index);
-                 }}
-                 style={{
-                  backgroundColor: index === currentIndex ? 'rgba(230, 230, 230, .9)' : 'rgba(100, 100, 100, .9)'
-                 }}
-               />
-             ))}
-           </div>
+              <div className="carousel-dots">
+                {savedPlaceDetails.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`carousel-dot ${
+                      index === currentSlide ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      goToSlide(index);
+                    }}
+                    style={{
+                      backgroundColor:
+                        index === currentIndex
+                          ? "rgba(230, 230, 230, .9)"
+                          : "rgba(100, 100, 100, .9)",
+                    }}
+                  />
+                ))}
+              </div>
             )}
           </div>
         )}

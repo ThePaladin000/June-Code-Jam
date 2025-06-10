@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { SignedIn, useUser, SignedOut } from "@clerk/clerk-react";
 import { useSavedPlaces } from "../../context/SavedPlacesContext.jsx";
-import { QRCodeSVG } from "qrcode.react";
 import "./Cards.css";
 import PlaceModal from "../PlaceModal/PlaceModal";
 import QRCodeModal from "../QRCodeModal/QRCodeModal";
@@ -97,7 +96,6 @@ export default function Cards({ places = [] }) {
       {places.map((place, idx) => {
         const placeId = place.id || place.placeId;
         const isSaved = isPlaceSaved(placeId);
-        const mapsUrl = getGoogleMapsUrl(place);
         const placeName =
           place.name || place.displayName?.text || "Unknown Place";
 
@@ -112,8 +110,10 @@ export default function Cards({ places = [] }) {
               />
             </div>
             <div className="card-info">
-              <h2 className="card-description">{placeName}</h2>
-              <p className="card-address">
+              <h2 onClick={() => openModal(place)} className="card-description">
+                {placeName}
+              </h2>
+              <p onClick={() => openModal(place)} className="card-address">
                 {place.formatted_address || place.formattedAddress}
               </p>
 
@@ -150,23 +150,6 @@ export default function Cards({ places = [] }) {
                     </button>
                   </div>
                 </SignedOut>
-
-                <div
-                  className="qr-code-container"
-                  title="Click to enlarge QR code"
-                  onClick={() =>
-                    setSelectedQRCode({ url: mapsUrl, name: placeName })
-                  }
-                >
-                  <QRCodeSVG
-                    value={mapsUrl}
-                    size={80}
-                    level="H"
-                    includeMargin={true}
-                    className="qr-code"
-                  />
-                  <span className="qr-label">Click to enlarge</span>
-                </div>
               </div>
             </div>
           </div>
