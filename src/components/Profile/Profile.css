@@ -1,3 +1,11 @@
+.profile-title {
+  font-family: "CrimsonPro-BoldItalic";
+}
+
+.profile-text {
+  font-family: "CrimsonPro-BoldItalic";
+  font-size: 20px;
+}
 
 /* 1. FIX CONTAINER ALIGNMENT */
 .carousel-section {
@@ -6,6 +14,11 @@
   margin: 0 auto;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.carousel-section-text {
+  font-family: "CrimsonPro-BoldItalic";
+  font-size: 20px;
 }
 
 .carousel-container {
@@ -50,7 +63,7 @@
 }
 
 /* 4. FIX TEXT ALIGNMENT */
-.carousel-text, 
+.carousel-text,
 .saved-places-text {
   text-align: center;
   width: 100%;
@@ -80,22 +93,31 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.3); /* ← Inactive state */
+  background-color: gray; /* ← Inactive state */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border: 1px solid #a0522d;
+}
+
+.carousel-dot:hover {
+  border: 2px solid rgb(32, 44, 1, 1);
 }
 
 .carousel-dot.active {
   background-color: rgba(255, 255, 255, 0.9); /* ← Active state */
 }
 
+.carousel-arrow {
+  border: 1px solid #a0522d;
+  background-color: rgba(200, 200, 200, 0.9);
+}
 
 /* Tablet View - 480px+ */
 @media (min-width: 480px) {
   .carousel-viewport {
     max-width: 400px;
   }
-  
+
   .carousel-slide .card-container {
     max-width: 350px;
   }
@@ -108,18 +130,18 @@
     justify-content: center;
     margin: 0 auto;
   }
-  
+
   .carousel-viewport {
     max-width: 500px;
   }
-  
+
   .carousel-slide .card-container {
     max-width: 450px;
     transform: translateX(0); /* ← Reset transform on desktop */
     margin: 0 auto;
   }
-  
-  .carousel-text, 
+
+  .carousel-text,
   .saved-places-text {
     transform: translateX(-5px); /* ← Keep text adjustment */
     max-width: 500px;
@@ -132,7 +154,7 @@
   .carousel-container {
     max-width: 1000px;
   }
-  
+
   .carousel-viewport {
     max-width: 600px;
   }

@@ -10,17 +10,10 @@ const tree =
 export default function Footer() {
   return (
     <div className="footer">
-      {/* <h3 className="footer-header">Green Finder Developers</h3> */}
       <div className="footer-contributors">
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree" />{" "}
-            <div>
-              {/* <IoLocationSharp
-                className="footer-icon-crow"
-                title="contributor-icon"
-              /> */}
-            </div>
+            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-crow" />{" "}
           </div>
           <div
             title="Link to Crow's GitHub"
@@ -38,13 +31,7 @@ export default function Footer() {
         </div>
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree" />
-            <div>
-              {/* <IoLocationSharp
-                className="footer-icon-rich"
-                title="contributor-icon"
-              /> */}
-            </div>
+            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-rich" />
           </div>
           <div
             title="Link to Ri₵h's GitHub"
@@ -62,16 +49,10 @@ export default function Footer() {
         </div>
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree" />
-            <div>
-              {/* <IoLocationSharp
-                className="footer-icon-majestik"
-                title="contributor-icon"
-              /> */}
-            </div>
+            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-majestyk" />
           </div>
           <div
-            title="Link to Majestik's GitHub"
+            title="Link to Majestyk's GitHub"
             className="footer-contributor-container"
           >
             <a
@@ -80,19 +61,13 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Majestik
+              Majestyk
             </a>
           </div>
         </div>
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree" />
-            <div>
-              {/* <IoLocationSharp
-                className="footer-icon-joshua"
-                title="contributor-icon"
-              /> */}
-            </div>
+            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-joshua" />
           </div>
           <div
             title="Link to Joshua's GitHub"
