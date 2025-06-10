@@ -13,7 +13,8 @@
 }
 
 .confirm__modal_content {
-  background: white;
+  border: 5px solid #a0522d;
+  background: black;
   padding: 30px;
   border-radius: 10px;
   max-width: 600px;
@@ -27,9 +28,9 @@
 }
 
 .confirm__modal-title {
-  font-size: 18px;
+  font-size: 26px;
   margin-bottom: 20px;
-  color: #333;
+  color: white;
 }
 
 .confirm__modal-buttons button {

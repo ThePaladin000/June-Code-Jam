@@ -4,9 +4,14 @@ import { SignedIn, useUser, SignedOut } from "@clerk/clerk-react";
 import { useSavedPlaces } from "../../context/SavedPlacesContext.jsx";
 import "./Cards.css";
 import PlaceModal from "../PlaceModal/PlaceModal";
+import QRCodeModal from "../QRCodeModal/QRCodeModal";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 export default function Cards({ places = [] }) {
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [placeToRemove, setPlaceToRemove] = useState(null);
+  const [selectedQRCode, setSelectedQRCode] = useState(null);
 
   const openModal = (place) => {
     if (selectedPlace === place) return;
@@ -21,29 +26,58 @@ export default function Cards({ places = [] }) {
   const { saveUserPlaces, removeUserPlaces, isPlaceSaved, loading } =
     useSavedPlaces();
 
+  const getGoogleMapsUrl = (place) => {
+    const address = place.formatted_address || place.formattedAddress || "";
+    const name = place.name || place.displayName?.text || "Unknown Place";
+    const encodedAddress = encodeURIComponent(`${name}, ${address}`);
+    return `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+  };
+
+  // Updated: Show confirm modal before removing a saved place
   const handleSavePlace = async (place) => {
     if (!isSignedIn) {
       alert("Please sign in to save places");
       return;
     }
 
-    try {
-      const placeId = place.id || place.placeId;
-      const placeName =
-        place.name || place.displayName?.text || "Unknown Place";
+    const placeId = place.id || place.placeId;
+    const placeName = place.name || place.displayName?.text || "Unknown Place";
 
-      if (isPlaceSaved(placeId)) {
-        // If already saved, remove it
-        await removeUserPlaces(placeId);
-        console.log(`Removed place: ${placeId} for user: ${user.id}`);
-      } else {
-        // If not saved, save it
-        await saveUserPlaces(placeId, placeName);
-        console.log(`Saved place: ${placeId} for user: ${user.id}`);
-      }
-    } catch (error) {
-      console.error("Error saving/removing place:", error);
+    if (isPlaceSaved(placeId)) {
+      // Show confirmation modal before removing
+      setPlaceToRemove({ placeId, placeName });
+      setShowConfirm(true);
+      return;
     }
+
+    try {
+      await saveUserPlaces(placeId, placeName);
+      console.log(`Saved place: ${placeId} for user: ${user.id}`);
+    } catch (error) {
+      console.error("Error saving place:", error);
+    }
+  };
+
+  // Confirm removal
+  const handleConfirmRemove = async () => {
+    if (placeToRemove) {
+      try {
+        await removeUserPlaces(placeToRemove.placeId);
+        console.log(
+          `Removed place: ${placeToRemove.placeId} for user: ${user.id}`
+        );
+      } catch (error) {
+        console.error("Error removing place:", error);
+      }
+    }
+    setShowConfirm(false);
+    setPlaceToRemove(null);
+  };
+
+  // Close confirm modal
+  const handleCloseConfirm = () => {
+    setShowConfirm(false);
+    setPlaceToRemove(null);
   };
 
   if (!places.length) {
@@ -125,6 +159,11 @@ export default function Cards({ places = [] }) {
         isOpen={!!selectedPlace}
         onRequestClose={closeModal}
         place={selectedPlace}
+      />
+      <ConfirmModal
+        isOpen={showConfirm}
+        onClose={handleCloseConfirm}
+        onConfirm={handleConfirmRemove}
       />
     </div>
   );
