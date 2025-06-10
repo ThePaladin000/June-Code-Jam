@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { fetchAutocompleteSuggestions } from "../../utils/utils";
 import { useUser } from "@clerk/clerk-react";
@@ -34,7 +34,6 @@ export default function Search({ onPlacesFetched }) {
   const [error, setError] = useState("");
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const { isSignedIn } = useUser();
-  const inputRef = useRef();
 
   const handleChange = async (e) => {
     const value = e.target.value;
@@ -136,14 +135,17 @@ export default function Search({ onPlacesFetched }) {
             value={query}
             onChange={handleChange}
             onFocus={() => predictions.length && setShowDropdown(true)}
+            onKeyDown={handleKeyDown}
           />
           {showDropdown && predictions.length > 0 && (
             <ul className="autocomplete-dropdown">
-              {predictions.map((p) => (
+              {predictions.map((p, i) => (
                 <li
                   key={p.placeId}
                   onMouseDown={() => handleSelect(p.description)}
-                  className="autocomplete-item"
+                  className={`autocomplete-item${
+                    i === highlightedIndex ? " highlighted" : ""
+                  }`}
                 >
                   <span className="autocomplete-suggestion-main">
                     {p.mainText}

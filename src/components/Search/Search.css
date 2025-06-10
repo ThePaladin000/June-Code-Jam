@@ -76,6 +76,10 @@
   background: #f0f8ff;
 }
 
+.autocomplete-item.highlighted {
+  background-color: #e0e0e0;
+}
+
 .autocomplete-suggestion-main {
   font-weight: bold;
 }
