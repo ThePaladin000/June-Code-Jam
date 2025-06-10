@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useUser } from "@clerk/clerk-react";
 import { userDataService } from "../utils/userDataService.js";
 
-export function useSavedPlaces() {
+export function useSavedPlacesInternal() {
   //get user from clerk
   const { user, isSignedIn } = useUser();
 

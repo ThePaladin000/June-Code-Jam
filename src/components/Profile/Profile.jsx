@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { useSavedPlaces } from "../../hooks/useSavedPlaces.js";
+import { useSavedPlaces } from "../../context/SavedPlacesContext.jsx";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
