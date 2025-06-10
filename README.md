@@ -2,7 +2,7 @@
 
 This website was created by team 4 for TripleTen's June-Code-Jam.
 
-To access the site, please visit this [link](https://june-code-jam.vercel.app/).
+To access the site, please visit this [GreenFindr.us](https://www.greenfindr.us/).
 
 ### Contributors:
 
