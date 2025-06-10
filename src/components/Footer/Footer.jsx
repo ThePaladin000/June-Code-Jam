@@ -13,7 +13,7 @@ export default function Footer() {
       {/* <h3 className="footer-header">Green Finder Developers</h3> */}
       <div className="footer-contributors">
         <div className="footer-contributor">
-          <div title="Link to Crow's favorite park" className="footer-image">
+          <div className="footer-image">
             <img src={tree} alt="Drawing of a tree" className="footer-tree" />{" "}
             <div>
               {/* <IoLocationSharp
