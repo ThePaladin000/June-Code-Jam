@@ -1,5 +1,5 @@
 # June-Code-Jam
-## Name of Website: Green Findr
+## Name of Website: [GreenFindr](https://www.greenfindr.us/)
 
 This website was created by team 4 for TripleTen's June-Code-Jam.
 
