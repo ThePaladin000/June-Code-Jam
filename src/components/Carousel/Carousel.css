@@ -15,7 +15,10 @@
   scroll-behavior: smooth;
   border: 4px solid #556b2f;
   border-radius: 50%;
-  background: radial-gradient(rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 1) 100%);
+  background: radial-gradient(
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(245, 245, 245, 1) 100%
+  );
 }
 
 ::-webkit-scrollbar {
@@ -75,6 +78,7 @@
 }
 
 .carousel__right-button {
+  padding: 0;
   width: 0;
   height: 0;
   border-bottom: 45px solid transparent;

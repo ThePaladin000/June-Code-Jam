@@ -21,7 +21,7 @@ export default function ConfirmModal({ isOpen, onClose, onConfirm }) {
           Are you sure you want to remove this from your GREEN BUCKET?
         </h2>
         <button onClick={onConfirm}>Yes</button>
-        <button style={{ marginLeft: "10px" }} onclick={onClose}>
+        <button style={{ marginLeft: "10px" }} onClick={onClose}>
           No
         </button>
       </div>

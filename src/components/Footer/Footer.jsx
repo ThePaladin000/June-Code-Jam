@@ -13,7 +13,11 @@ export default function Footer() {
       <div className="footer-contributors">
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-crow" />{" "}
+            <img
+              src={tree}
+              alt="Drawing of a tree"
+              className="footer-tree footer-tree-crow"
+            />{" "}
           </div>
           <div
             title="Link to Crow's GitHub"
@@ -31,7 +35,11 @@ export default function Footer() {
         </div>
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-rich" />
+            <img
+              src={tree}
+              alt="Drawing of a tree"
+              className="footer-tree footer-tree-rich"
+            />
           </div>
           <div
             title="Link to Ri₵h's GitHub"
@@ -49,7 +57,11 @@ export default function Footer() {
         </div>
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-majestyk" />
+            <img
+              src={tree}
+              alt="Drawing of a tree"
+              className="footer-tree footer-tree-majestyk"
+            />
           </div>
           <div
             title="Link to Majestyk's GitHub"
@@ -61,13 +73,17 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Majestyk
+              Magic
             </a>
           </div>
         </div>
         <div className="footer-contributor">
           <div className="footer-image">
-            <img src={tree} alt="Drawing of a tree" className="footer-tree footer-tree-joshua" />
+            <img
+              src={tree}
+              alt="Drawing of a tree"
+              className="footer-tree footer-tree-joshua"
+            />
           </div>
           <div
             title="Link to Joshua's GitHub"

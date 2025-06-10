@@ -90,11 +90,12 @@
   animation: logo-spin 20s linear infinite;
 }
 
-.heart-icon .filled {
+.heart-button .filled {
   color: #e74c3c;
 }
 
 .heart-button {
+  color: black;
   background-color: rgba(200, 200, 200, 0.9);
 }
 
