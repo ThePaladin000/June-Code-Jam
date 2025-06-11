@@ -1,8 +1,4 @@
-import { IoLocationSharp } from "react-icons/io5";
 import "./Footer.css";
-// // import grass from "../assets/grass.jpg";
-// const grassUrl =
-//   "https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZFxoxTRXJGv0zHpLdhj4Tmf1ZY5OBKVxN9XD6";
 
 const tree =
   "https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZIdbw8gAjGwgyepxTk47RCPfotcAalOuXUd0E";

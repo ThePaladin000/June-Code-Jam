@@ -5,12 +5,13 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
 import "./Profile.css";
+import Spinner from "../Spinner/Spinner";
 
 function Profile() {
   const { isSignedIn } = useUser();
   const { savedPlaces } = useSavedPlaces();
   const [savedPlaceDetails, setSavedPlaceDetails] = useState([]);
-  const [, setFetchingDetails] = useState(false);
+  const [fetchingDetails, setFetchingDetails] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSlide] = useState(0);
 
@@ -92,7 +93,12 @@ function Profile() {
       <div className="profile-container">
         <h1 className="profile-title">MY GREEN BUCKET LIST</h1>
 
-        {savedPlaceDetails.length === 0 ? (
+        {fetchingDetails ? (
+          <div className="loading-state">
+            <p className="profile-text">Cards are loading</p>
+            <Spinner />
+          </div>
+        ) : savedPlaceDetails.length === 0 ? (
           <div className="empty-state">
             <p className="profile-text">No saved places yet!</p>
             <p className="profile-text">
@@ -128,7 +134,11 @@ function Profile() {
                 >
                   {savedPlaceDetails.map((place, index) => (
                     <div key={place.id || index} className="carousel-slide">
-                      <Cards places={[place]} />
+                      {fetchingDetails ? (
+                        <Spinner />
+                      ) : (
+                        <Cards places={[place]} />
+                      )}
                     </div>
                   ))}
                 </div>

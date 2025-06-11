@@ -7,7 +7,6 @@
   font-size: 20px;
 }
 
-/* 1. FIX CONTAINER ALIGNMENT */
 .carousel-section {
   width: 100%;
   max-width: 100%;
@@ -19,13 +18,14 @@
 .carousel-section-text {
   font-family: "CrimsonPro-BoldItalic";
   font-size: 20px;
+  margin: 0;
 }
 
 .carousel-container {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center; /* ← Centers everything */
+  justify-content: center;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -33,10 +33,9 @@
   box-sizing: border-box;
 }
 
-/* 2. FIX CAROUSEL VIEWPORT */
 .carousel-viewport {
   width: 100%;
-  max-width: 300px; /* ← REDUCED from 320px */
+  max-width: 300px;
   overflow: hidden;
   border-radius: 12px;
   touch-action: pan-x;
@@ -44,7 +43,6 @@
   box-sizing: border-box;
 }
 
-/* 3. FIX CAROUSEL TRACK */
 .carousel-track {
   display: flex;
   transition: transform 0.3s ease-in-out;
@@ -52,30 +50,28 @@
 }
 
 .carousel-slide {
-  min-width: 100%; /* ← This should match viewport exactly */
+  min-width: 100%;
   max-width: 100%;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: 0; /* ← Small padding for breathing room */
+  padding: 0;
 }
 
-/* 4. FIX TEXT ALIGNMENT */
 .carousel-text,
 .saved-places-text {
   text-align: center;
   width: 100%;
   margin: 0 auto 20px auto;
-  padding: 0 15px; /* ← Moves text 5px left effectively */
-  transform: translateX(-5px); /* ← Precise 5px left adjustment */
+  padding: 0 15px;
+  transform: translateX(-5px);
 }
 
-/* 5. FIX CARD POSITIONING */
 .carousel-slide .card-container {
   width: 100%;
-  max-width: 280px; /* ← Slightly smaller than viewport */
+  max-width: 280px;
   margin: 0 auto;
   flex: none;
   box-sizing: border-box;
@@ -84,6 +80,9 @@
 
 .carousel-dots {
   display: flex;
+  flex-wrap: wrap;
+  width: 250px;
+  margin: auto;
   justify-content: center;
   gap: 8px;
   margin-top: 20px;
@@ -93,7 +92,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: gray; /* ← Inactive state */
+  background-color: gray;
   cursor: pointer;
   transition: background-color 0.3s ease;
   border: 1px solid #a0522d;
@@ -104,7 +103,7 @@
 }
 
 .carousel-dot.active {
-  background-color: rgba(255, 255, 255, 0.9); /* ← Active state */
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .carousel-arrow {
@@ -114,7 +113,6 @@
   font-size: 17px;
 }
 
-/* Tablet View - 480px+ */
 @media (min-width: 480px) {
   .carousel-viewport {
     max-width: 400px;
@@ -125,10 +123,9 @@
   }
 }
 
-/* Desktop View - 768px+ */
 @media (min-width: 768px) {
   .carousel-container {
-    max-width: 800px; /* ← Prevents desktop push-left issue */
+    max-width: 800px;
     justify-content: center;
     margin: 0 auto;
   }
@@ -139,19 +136,18 @@
 
   .carousel-slide .card-container {
     max-width: 450px;
-    transform: translateX(0); /* ← Reset transform on desktop */
+    transform: translateX(0);
     margin: 0 auto;
   }
 
   .carousel-text,
   .saved-places-text {
-    transform: translateX(-5px); /* ← Keep text adjustment */
+    transform: translateX(-5px);
     max-width: 500px;
     margin: 0 auto 20px auto;
   }
 }
 
-/* Large Desktop - 1024px+ */
 @media (min-width: 1024px) {
   .carousel-container {
     max-width: 1000px;

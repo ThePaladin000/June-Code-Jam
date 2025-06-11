@@ -39,7 +39,6 @@ export const userDataService = {
       const userDoc = await getDoc(userDocRef);
       if (!userDoc.exists()) return true;
       const savedPlaces = userDoc.data().savedPlaces || [];
-      // Remove by id
       const updatedPlaces = savedPlaces.filter((p) =>
         typeof p === "string" ? p !== placeId : p.id !== placeId
       );

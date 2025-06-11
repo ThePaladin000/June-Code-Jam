@@ -26,7 +26,7 @@ function incrementSearchCount() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-export default function Search({ onPlacesFetched }) {
+export default function Search({ onPlacesFetched, onLoading }) {
   const [query, setQuery] = useState("");
   const [predictions, setPredictions] = useState([]);
   const [selectedPrediction, setSelectedPrediction] = useState(null);
@@ -105,6 +105,7 @@ export default function Search({ onPlacesFetched }) {
         if (onPlacesFetched) onPlacesFetched([]);
         return;
       }
+      if (onLoading) onLoading(true);
       const response = await fetch(
         `/api/nearby-parks?placeId=${predictionToFetch.placeId}`
       );
@@ -114,6 +115,9 @@ export default function Search({ onPlacesFetched }) {
     } catch (err) {
       setError("Error fetching nearby parks");
       if (onPlacesFetched) onPlacesFetched([]);
+      console.error("Error fetching nearby parks", err);
+    } finally {
+      if (onLoading) onLoading(false);
     }
   };
 

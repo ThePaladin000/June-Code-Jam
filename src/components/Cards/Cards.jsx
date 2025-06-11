@@ -25,7 +25,6 @@ export default function Cards({ places = [] }) {
   const { saveUserPlaces, removeUserPlaces, isPlaceSaved, loading } =
     useSavedPlaces();
 
-  // Updated: Show confirm modal before removing a saved place
   const handleSavePlace = async (place) => {
     if (!isSignedIn) {
       alert("Please sign in to save places");
@@ -36,7 +35,6 @@ export default function Cards({ places = [] }) {
     const placeName = place.name || place.displayName?.text || "Unknown Place";
 
     if (isPlaceSaved(placeId)) {
-      // Show confirmation modal before removing
       setPlaceToRemove({ placeId, placeName });
       setShowConfirm(true);
       return;
@@ -50,7 +48,6 @@ export default function Cards({ places = [] }) {
     }
   };
 
-  // Confirm removal
   const handleConfirmRemove = async () => {
     if (placeToRemove) {
       try {
@@ -66,7 +63,6 @@ export default function Cards({ places = [] }) {
     setPlaceToRemove(null);
   };
 
-  // Close confirm modal
   const handleCloseConfirm = () => {
     setShowConfirm(false);
     setPlaceToRemove(null);
