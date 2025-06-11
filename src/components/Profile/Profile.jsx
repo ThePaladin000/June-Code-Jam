@@ -24,14 +24,13 @@ function Profile() {
       setFetchingDetails(true);
 
       try {
-        const detailsPromises = savedPlaces.map(async (placeObj) => {
-          const placeId = placeObj.id || placeObj;
-          const placeName = placeObj.name || undefined;
-          try {
+        const details = await Promise.all(
+          savedPlaces.map(async (placeObj) => {
+            const placeId = placeObj.id || placeObj;
+            const placeName = placeObj.name || undefined;
             const response = await fetch(
               `/api/place-details?placeId=${placeId}`
             );
-
             if (response.ok) {
               const data = await response.json();
               return { ...data, id: placeId, name: placeName };
@@ -39,18 +38,9 @@ function Profile() {
               console.error(`Failed to fetch details for place: ${placeId}`);
               return null;
             }
-          } catch (error) {
-            console.error(
-              `💥 Error fetching details for place ${placeId}:`,
-              error
-            );
-            return null;
-          }
-        });
-
-        const details = await Promise.all(detailsPromises);
+          })
+        );
         const validDetails = details.filter((detail) => detail !== null);
-
         setSavedPlaceDetails(validDetails);
       } catch (error) {
         console.error("💥 Error fetching saved place details:", error);
