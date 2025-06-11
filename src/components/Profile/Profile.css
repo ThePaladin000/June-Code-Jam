@@ -79,13 +79,13 @@
 }
 
 .profile__carousel-dots {
-  display: flex;
+ display: flex;
   flex-wrap: wrap;
-  width: 350px;
-  margin: auto;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto 0 auto;
   justify-content: center;
   gap: 8px;
-  margin-top: 20px;
 }
 
 .profile__carousel-dot {
