@@ -1,10 +1,17 @@
 .header__container {
+  flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.header__tagline{
+  font-size: 16px;
+  font-family: "CrimsonPro-BoldItalic";
+  margin:0;
 }
 
 .header__logo {
