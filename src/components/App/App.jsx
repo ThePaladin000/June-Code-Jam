@@ -16,12 +16,16 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <>
-      <Navbar />
-      <Search onPlacesFetched={setPlaces} onLoading={setLoading} />
-      {loading ? <Spinner /> : <Cards places={places} />}
+    <div className="home__layout">
+      <div className="home__header">
+        <Navbar />
+        <Search onPlacesFetched={setPlaces} onLoading={setLoading} />
+      </div>
+      <div className={`home__content ${places.length > 0 ? 'has-cards' : ''}`}>  {/* ✅ ADD this dynamic class */}
+        {loading ? <Spinner /> : <Cards places={places} />}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
