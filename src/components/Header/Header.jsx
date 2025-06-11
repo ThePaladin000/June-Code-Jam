@@ -5,7 +5,7 @@ export default function Header() {
     <>
       <div className="header__container">
         <h1 className="header__title">GREEN FINDR</h1>
-        {/* <p>Tagline goes here... or one liner about what to do</p> */}
+        <p className="header__tagline">Parks Made Easy</p>
       </div>
     </>
   );
