@@ -81,7 +81,7 @@
 .carousel-dots {
   display: flex;
   flex-wrap: wrap;
-  width: 250px;
+  width: 350px;
   margin: auto;
   justify-content: center;
   gap: 8px;
