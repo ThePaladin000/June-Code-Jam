@@ -57,7 +57,11 @@
 }
 
 .card-info {
-  width: 100%; /* ← Match the card width */
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .card-description {

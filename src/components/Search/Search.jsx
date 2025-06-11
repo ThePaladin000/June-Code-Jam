@@ -132,6 +132,7 @@ export default function Search({ onPlacesFetched }) {
           <input
             type="text"
             className="search-input"
+            placeholder="Add an address to find nearby parks"
             value={query}
             onChange={handleChange}
             onFocus={() => predictions.length && setShowDropdown(true)}
