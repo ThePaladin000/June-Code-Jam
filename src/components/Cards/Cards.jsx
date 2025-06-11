@@ -73,7 +73,7 @@ export default function Cards({ places = [] }) {
       <div className="cards__containers">
         <img
           src="https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZBNzrJheQ2aqORSW8MCezTibwhEHBFkt7xAcG"
-          alt="No places to display"
+          alt="Picture of a spinning green globe"
           className="globe__image"
         />
       </div>

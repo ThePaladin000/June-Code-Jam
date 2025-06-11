@@ -102,6 +102,10 @@
   animation: logo-spin 20s linear infinite;
 }
 
+.globe__image:hover {
+  animation: logo-spin 1s linear infinite;
+}
+
 .heart__button .filled {
   color: #e74c3c;
 }
