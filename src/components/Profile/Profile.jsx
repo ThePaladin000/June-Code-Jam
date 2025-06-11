@@ -7,6 +7,17 @@ import Cards from "../Cards/Cards";
 import "./Profile.css";
 import Spinner from "../Spinner/Spinner";
 
+function fetchWithTimeout(fetchPromise, ms, defaultData) {
+  let timeoutId;
+  const timeoutPromise = new Promise((resolve) => {
+    timeoutId = setTimeout(() => resolve(defaultData), ms);
+  });
+  return Promise.race([
+    fetchPromise.finally(() => clearTimeout(timeoutId)),
+    timeoutPromise,
+  ]);
+}
+
 function Profile() {
   const { isSignedIn } = useUser();
   const { savedPlaces } = useSavedPlaces();
@@ -24,20 +35,44 @@ function Profile() {
       setFetchingDetails(true);
 
       try {
+        const TIMEOUT_MS = 10000;
+        const DEFAULT_PLACE = {
+          name: "Unknown Place",
+          formatted_address: "N/A",
+          photoUrl:
+            "https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZg78MwL6UdCEGTmap1qjM9ousryfQDcWIAJ2v",
+        };
+
         const details = await Promise.all(
           savedPlaces.map(async (placeObj) => {
             const placeId = placeObj.id || placeObj;
             const placeName = placeObj.name || undefined;
-            const response = await fetch(
-              `/api/place-details?placeId=${placeId}`
-            );
-            if (response.ok) {
-              const data = await response.json();
-              return { ...data, id: placeId, name: placeName };
-            } else {
-              console.error(`Failed to fetch details for place: ${placeId}`);
-              return null;
-            }
+            const fetchPromise = fetch(`/api/place-details?placeId=${placeId}`)
+              .then(async (response) => {
+                if (response.ok) {
+                  const data = await response.json();
+                  return { ...data, id: placeId, name: placeName };
+                } else {
+                  console.error(
+                    `Failed to fetch details for place: ${placeId}`
+                  );
+                  return null;
+                }
+              })
+              .catch((error) => {
+                console.error(
+                  `💥 Error fetching details for place ${placeId}:`,
+                  error
+                );
+                return null;
+              });
+
+            const result = await fetchWithTimeout(fetchPromise, TIMEOUT_MS, {
+              ...DEFAULT_PLACE,
+              id: placeId,
+              name: placeName,
+            });
+            return result;
           })
         );
         const validDetails = details.filter((detail) => detail !== null);
