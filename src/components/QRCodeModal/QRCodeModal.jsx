@@ -8,22 +8,22 @@ export default function QRCodeModal({ isOpen, onClose, mapsUrl, placeName }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className="qr-modal"
-      overlayClassName="qr-modal-overlay"
+      className="qr__modal"
+      overlayClassName="qr__modal-overlay"
       contentLabel="QR Code Modal"
     >
-      <div className="qr-modal-content">
+      <div className="qr__modal-content">
         <h2>Scan for directions to {placeName}</h2>
-        <div className="qr-code-wrapper">
+        <div className="qr__code-wrapper">
           <QRCodeSVG
             value={mapsUrl}
             size={300}
             level="H"
             includeMargin={true}
-            className="qr-code-large"
+            className="qr__code-large"
           />
         </div>
-        <button className="close-button" onClick={onClose}>
+        <button className="qr__close-button" onClick={onClose}>
           Close
         </button>
       </div>

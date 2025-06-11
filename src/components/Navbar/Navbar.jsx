@@ -16,15 +16,15 @@ export default function Navbar() {
 
   return (
     <header className="navbar">
-      <div className="navbar-left">
+      <div className="navbar__left">
         <FaHome
-          className="navbar-icon"
+          className="navbar__icon"
           title="Home"
           onClick={() => navigate("/")}
         />
         <SignedIn>
           <FaLocationArrow
-            className="navbar-icon"
+            className="navbar__icon"
             title="Profile"
             onClick={() => navigate("/profile")}
           />
@@ -35,7 +35,7 @@ export default function Navbar() {
         src="https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZlkot58vCy0GJFV1IZ3UXetAnNr4mDQjgHsSa"
         alt="Green Findr Logo"
       />
-      <div className="navbar-right">
+      <div className="navbar__right">
         <SignedOut>
           <SignInButton className="navbar__signin-btn" mode="modal" />
         </SignedOut>

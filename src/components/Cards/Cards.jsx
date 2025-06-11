@@ -70,17 +70,17 @@ export default function Cards({ places = [] }) {
 
   if (!places.length) {
     return (
-      <div className="cards-containers">
+      <div className="cards__containers">
         <img
           src="https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZBNzrJheQ2aqORSW8MCezTibwhEHBFkt7xAcG"
           alt="No places to display"
-          className="globe-image"
+          className="globe__image"
         />
       </div>
     );
   }
   return (
-    <div className="cards-containers">
+    <div className="cards__containers">
       {places.map((place, idx) => {
         const placeId = place.id || place.placeId;
         const isSaved = isPlaceSaved(placeId);
@@ -88,28 +88,28 @@ export default function Cards({ places = [] }) {
           place.name || place.displayName?.text || "Unknown Place";
 
         return (
-          <div className="card-container" key={placeId || idx}>
+          <div className="card__container" key={placeId || idx}>
             <div className="card">
               <img
                 src={place.photoUrl || "https://placehold.co/600x400"}
                 alt={place.name || "Place"}
                 onClick={() => openModal(place)}
-                className="card-image"
+                className="card__image"
               />
             </div>
-            <div className="card-info">
-              <h2 onClick={() => openModal(place)} className="card-description">
+            <div className="card__info">
+              <h2 onClick={() => openModal(place)} className="card__description">
                 {placeName}
               </h2>
-              <p onClick={() => openModal(place)} className="card-address">
+              <p onClick={() => openModal(place)} className="card__address">
                 {place.formatted_address || place.formattedAddress}
               </p>
 
-              <div className="card-actions">
+              <div className="card__actions">
                 <SignedIn>
-                  <div className="save-button">
+                  <div className="save__button">
                     <button
-                      className="heart-button"
+                      className="heart__button"
                       onClick={() => handleSavePlace(place)}
                       disabled={loading}
                       title={
@@ -117,9 +117,9 @@ export default function Cards({ places = [] }) {
                       }
                     >
                       {isSaved ? (
-                        <FaHeart className="heart-icon filled" />
+                        <FaHeart className="heart__icon filled" />
                       ) : (
-                        <FaRegHeart className="heart-icon empty" />
+                        <FaRegHeart className="heart__icon empty" />
                       )}
                       {isSaved ? " Saved" : " Save"}
                     </button>
@@ -127,13 +127,13 @@ export default function Cards({ places = [] }) {
                 </SignedIn>
 
                 <SignedOut>
-                  <div className="save-button">
+                  <div className="save__button">
                     <button
-                      className="heart-button"
+                      className="heart__button"
                       onClick={() => alert("Please sign in to save places")}
                       title="Sign in to save places"
                     >
-                      <FaRegHeart className="heart-icon empty" />
+                      <FaRegHeart className="heart__icon empty" />
                       Sign In to Save
                     </button>
                   </div>

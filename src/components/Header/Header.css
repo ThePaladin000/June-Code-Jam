@@ -8,10 +8,10 @@
   box-sizing: border-box;
 }
 
-.header__tagline{
+.header__tagline {
   font-size: 18px;
   font-family: "CrimsonPro-BoldItalic";
-  margin:0;
+  margin: 0;
 }
 
 .header__logo {
@@ -31,12 +31,12 @@
   .header__container {
     padding: 15px;
   }
-  
+
   .header__logo {
     height: 95px;
     width: 90px;
   }
-  
+
   .header__title {
     font-size: 35px;
   }
@@ -46,12 +46,12 @@
   .header__container {
     padding: 20px;
   }
-  
+
   .header__logo {
     height: 110px;
     width: 105px;
   }
-  
+
   .header__title {
     font-size: 42px;
   }
@@ -62,7 +62,7 @@
     height: 117px;
     width: 115px;
   }
-  
+
   .header__title {
     font-size: 50px;
   }

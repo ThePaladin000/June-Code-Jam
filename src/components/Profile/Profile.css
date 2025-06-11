@@ -1,13 +1,13 @@
-.profile-title {
+.profile__title {
   font-family: "CrimsonPro-BoldItalic";
 }
 
-.profile-text {
+.profile__text {
   font-family: "CrimsonPro-BoldItalic";
   font-size: 20px;
 }
 
-.carousel-section {
+.profile__carousel_section {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -15,13 +15,13 @@
   box-sizing: border-box;
 }
 
-.carousel-section-text {
+.profile__carousel_section-text {
   font-family: "CrimsonPro-BoldItalic";
   font-size: 20px;
   margin: 0;
 }
 
-.carousel-container {
+.profile__carousel-container {
   position: relative;
   display: flex;
   align-items: center;
@@ -33,7 +33,7 @@
   box-sizing: border-box;
 }
 
-.carousel-viewport {
+.profile__carousel-viewport {
   width: 100%;
   max-width: 300px;
   overflow: hidden;
@@ -43,13 +43,13 @@
   box-sizing: border-box;
 }
 
-.carousel-track {
+.profile__carousel-track {
   display: flex;
   transition: transform 0.3s ease-in-out;
   width: 100%;
 }
 
-.carousel-slide {
+.profile__carousel-slide {
   min-width: 100%;
   max-width: 100%;
   flex-shrink: 0;
@@ -60,8 +60,8 @@
   padding: 0;
 }
 
-.carousel-text,
-.saved-places-text {
+.profile__carousel-text,
+.saved__places-text {
   text-align: center;
   width: 100%;
   margin: 0 auto 20px auto;
@@ -69,7 +69,7 @@
   transform: translateX(-5px);
 }
 
-.carousel-slide .card-container {
+.profile__carousel-slide .card__container {
   width: 100%;
   max-width: 280px;
   margin: 0 auto;
@@ -78,7 +78,7 @@
   transform: translateX(0);
 }
 
-.carousel-dots {
+.profile__carousel-dots {
   display: flex;
   flex-wrap: wrap;
   width: 350px;
@@ -88,7 +88,7 @@
   margin-top: 20px;
 }
 
-.carousel-dot {
+.profile__carousel-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -98,15 +98,15 @@
   border: 1px solid #a0522d;
 }
 
-.carousel-dot:hover {
+.profile__carousel-dot:hover {
   border: 2px solid rgb(32, 44, 1, 1);
 }
 
-.carousel-dot.active {
+.profile__carousel-dot.active {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.carousel-arrow {
+.profile__carousel_arrow {
   border: 4px solid #a0522d;
   background-color: rgba(200, 200, 200, 0.9);
   color: black;
@@ -114,34 +114,34 @@
 }
 
 @media (min-width: 480px) {
-  .carousel-viewport {
+  .profile__carousel-viewport {
     max-width: 400px;
   }
 
-  .carousel-slide .card-container {
+  .profile__carousel-slide .card__container {
     max-width: 350px;
   }
 }
 
 @media (min-width: 768px) {
-  .carousel-container {
+  .profile__carousel-container {
     max-width: 800px;
     justify-content: center;
     margin: 0 auto;
   }
 
-  .carousel-viewport {
+  .profile__carousel-viewport {
     max-width: 500px;
   }
 
-  .carousel-slide .card-container {
+  .profile__carousel-slide .card__container {
     max-width: 450px;
     transform: translateX(0);
     margin: 0 auto;
   }
 
-  .carousel-text,
-  .saved-places-text {
+  .profile__carousel-text,
+  .saved__places-text {
     transform: translateX(-5px);
     max-width: 500px;
     margin: 0 auto 20px auto;
@@ -149,11 +149,11 @@
 }
 
 @media (min-width: 1024px) {
-  .carousel-container {
+  .profile__carousel-container {
     max-width: 1000px;
   }
 
-  .carousel-viewport {
+  .profile__carousel-viewport {
     max-width: 600px;
   }
 }

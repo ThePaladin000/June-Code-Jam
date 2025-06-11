@@ -22,16 +22,19 @@ export function incrementSearchCount() {
 }
 
 export function getSearchHistory() {
-  return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]').slice(0, MAX_HISTORY_ITEMS);
+  return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]").slice(
+    0,
+    MAX_HISTORY_ITEMS
+  );
 }
 
 export function addToSearchHistory(searchTerm) {
   const currentHistory = getSearchHistory();
   const newHistory = [
-    searchTerm, 
-    ...currentHistory.filter(h => h !== searchTerm)
+    searchTerm,
+    ...currentHistory.filter((h) => h !== searchTerm),
   ].slice(0, MAX_HISTORY_ITEMS);
-  
+
   localStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory));
   return newHistory;
 }

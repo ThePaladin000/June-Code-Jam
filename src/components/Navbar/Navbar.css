@@ -10,7 +10,7 @@
   color: #fff;
 }
 
-.navbar-left {
+.navbar__left {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -25,7 +25,7 @@
   width: 60px;
 }
 
-.navbar-icon {
+.navbar__icon {
   justify-self: center;
   font-size: 1.7rem;
   cursor: pointer;
@@ -33,17 +33,17 @@
   color: #556b2f;
 }
 
-.navbar-icon:hover {
+.navbar__icon:hover {
   color: #a0522d;
 }
 
-.navbar-right {
+.navbar__right {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   z-index: 1;
 }
-.navbar-btn {
+.navbar__btn {
   padding: 0.4rem 0.8rem;
   border: none;
   border-radius: 6px;
@@ -62,7 +62,7 @@
   background-color: #556b2f;
 }
 
-.navbar-btn:hover {
+.navbar__btn:hover {
   background: #21a1f3;
   color: #fff;
 }
@@ -95,7 +95,7 @@
   .navbar {
     padding: 18px 15px 25px;
   }
-  .navbar-left {
+  .navbar__left {
     gap: 1rem;
   }
 
@@ -104,15 +104,15 @@
     width: 75px;
   }
 
-  .navbar-icon {
+  .navbar__icon {
     font-size: 1.5rem;
   }
 
-  .navbar-right {
+  .navbar__right {
     gap: 1rem;
   }
 
-  .navbar-btn {
+  .navbar__btn {
     padding: 0.45rem 1rem;
     font-size: 0.9rem;
   }
@@ -133,11 +133,11 @@
     width: 85px;
   }
 
-  .navbar-icon {
+  .navbar__icon {
     font-size: 1.6rem;
   }
 
-  .navbar-btn {
+  .navbar__btn {
     padding: 0.5rem 1.2rem;
     font-size: 1rem;
   }
@@ -159,7 +159,7 @@
     width: 100px;
   }
 
-  .navbar-icon {
+  .navbar__icon {
     font-size: 1.7rem;
   }
 
