@@ -11,7 +11,6 @@ export default function Cards({ places = [] }) {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
   const [placeToRemove, setPlaceToRemove] = useState(null);
-  const [selectedQRCode, setSelectedQRCode] = useState(null);
 
   const openModal = (place) => {
     if (selectedPlace === place) return;
@@ -25,13 +24,6 @@ export default function Cards({ places = [] }) {
   const { user, isSignedIn } = useUser();
   const { saveUserPlaces, removeUserPlaces, isPlaceSaved, loading } =
     useSavedPlaces();
-
-  const getGoogleMapsUrl = (place) => {
-    const address = place.formatted_address || place.formattedAddress || "";
-    const name = place.name || place.displayName?.text || "Unknown Place";
-    const encodedAddress = encodeURIComponent(`${name}, ${address}`);
-    return `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
-  };
 
   // Updated: Show confirm modal before removing a saved place
   const handleSavePlace = async (place) => {

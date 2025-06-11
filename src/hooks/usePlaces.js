@@ -6,7 +6,6 @@ export function usePlaces() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch places from the API
   const fetchPlaces = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -22,7 +21,6 @@ export function usePlaces() {
     }
   }, []);
 
-  // Add a new place
   const addPlace = useCallback(async (placeData) => {
     setLoading(true);
     setError(null);
@@ -43,7 +41,6 @@ export function usePlaces() {
     }
   }, []);
 
-  // search places
   const searchPlaces = useCallback(async (searchTerm) => {
     setLoading(true);
     setError(null);
@@ -61,43 +58,19 @@ export function usePlaces() {
     }
   }, []);
 
-  // filter places by type
-  const getPlacesByType = useCallback(async (placeType) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const filteredPlaces = await placesService.getPlacesByType(placeType);
-      setPlaces(filteredPlaces);
-      return filteredPlaces;
-    } catch (err) {
-      setError(err.message);
-      console.error("Error filtering places by type:", err);
-      return [];
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  // Auto fetch places when components used(mounts)
   useEffect(() => {
     fetchPlaces();
   }, [fetchPlaces]);
 
-  //return clean interface
   return {
-    //data
     places,
     loading,
     error,
 
-    //actions
     addPlace,
     searchPlaces,
-    getPlacesByType,
     refetchPlaces: fetchPlaces,
 
-    //Utilitites
     clearError: () => setError(null),
   };
 }

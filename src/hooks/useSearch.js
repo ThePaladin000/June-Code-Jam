@@ -1,21 +1,20 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { useUser } from '@clerk/clerk-react';
-import { fetchAutocompleteSuggestions } from '../utils/utils';
-import { placesService } from '../utils/index';
-import { 
-  getSearchCount, 
-  incrementSearchCount, 
-  getSearchHistory, 
-  addToSearchHistory, 
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useUser } from "@clerk/clerk-react";
+import { fetchAutocompleteSuggestions } from "../utils/utils";
+import { placesService } from "../utils/index";
+import {
+  getSearchCount,
+  incrementSearchCount,
+  getSearchHistory,
+  addToSearchHistory,
   clearSearchHistory as clearStoredHistory,
   getSearchLimit,
-  getSearchesRemaining 
-} from '../utils/searchUtils';
+  getSearchesRemaining,
+} from "../utils/searchUtils";
 
 export function useSearch() {
   const { isSignedIn } = useUser();
-  
-  // Search state
+
   const [query, setQuery] = useState("");
   const [predictions, setPredictions] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -24,16 +23,13 @@ export function useSearch() {
   const [error, setError] = useState(null);
   const [searchHistory, setSearchHistory] = useState([]);
 
-  // Use ref for timer to avoid stale closures
   const debounceTimerRef = useRef(null);
 
-  // Load search history on mount
   useEffect(() => {
     const history = getSearchHistory();
     setSearchHistory(history);
   }, []);
 
-  // Debounced autocomplete function
   const fetchPredictions = useCallback(async (searchTerm) => {
     if (!searchTerm.trim()) {
       setPredictions([]);
@@ -49,8 +45,8 @@ export function useSearch() {
       setPredictions(results);
       setShowDropdown(results.length > 0);
     } catch (err) {
-      setError('Failed to fetch suggestions');
-      console.error('Error fetching autocomplete suggestions:', err);
+      setError("Failed to fetch suggestions");
+      console.error("Error fetching autocomplete suggestions:", err);
       setPredictions([]);
       setShowDropdown(false);
     } finally {
@@ -58,129 +54,120 @@ export function useSearch() {
     }
   }, []);
 
-  // Handle search input with debouncing - FIXED!
-  const handleSearchInput = useCallback((value) => {
-    setQuery(value);
+  const handleSearchInput = useCallback(
+    (value) => {
+      setQuery(value);
 
-    // Clear existing timer using ref
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
 
-    // Set new timer for debounced search
-    debounceTimerRef.current = setTimeout(() => {
-      fetchPredictions(value);
-    }, 300); // 300ms debounce
+      debounceTimerRef.current = setTimeout(() => {
+        fetchPredictions(value);
+      }, 300);
+    },
+    [fetchPredictions]
+  );
 
-  }, [fetchPredictions]); // ← Fixed dependencies!
-
-  // Handle selecting a prediction
   const handleSelectPrediction = useCallback((prediction) => {
     setQuery(prediction.description);
     setShowDropdown(false);
     setPredictions([]);
   }, []);
 
-  // Check search limits for non-signed-in users
   const checkSearchLimit = useCallback(() => {
     if (isSignedIn) return true;
-    
+
     const count = getSearchCount();
     const limit = getSearchLimit();
     if (count >= limit) {
-      setError("You have reached your free search limit for this month. Please sign in for unlimited searches.");
+      setError(
+        "You have reached your free search limit for this month. Please sign in for unlimited searches."
+      );
       return false;
     }
     return true;
   }, [isSignedIn]);
 
-  // Perform actual search - ENHANCED!
-  const performSearch = useCallback(async (searchTerm) => {
-    // Use current query if no searchTerm provided
-    const termToSearch = searchTerm || query;
-    
-    if (!termToSearch.trim()) {
-      setError("Please enter a search term");
-      return [];
-    }
+  const performSearch = useCallback(
+    async (searchTerm) => {
+      const termToSearch = searchTerm || query;
 
-    if (!checkSearchLimit()) {
-      return [];
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      // Increment search count for non-signed-in users
-      if (!isSignedIn) {
-        incrementSearchCount();
+      if (!termToSearch.trim()) {
+        setError("Please enter a search term");
+        return [];
       }
 
-      // Search places using Firebase
-      console.log('🔍 Searching for:', termToSearch);
-      const results = await placesService.searchPlaces(termToSearch);
-      console.log('🎯 Search results received:', results);
-      
-      // Update state
-      setSearchResults(results);
+      if (!checkSearchLimit()) {
+        return [];
+      }
 
-      // Update search history
-      const newHistory = addToSearchHistory(termToSearch);
-      setSearchHistory(newHistory);
+      setLoading(true);
+      setError(null);
 
-      setShowDropdown(false);
-      return results;
-    } catch (err) {
-      setError('Search failed. Please try again.');
-      console.error('Error performing search:', err);
-      return [];
-    } finally {
-      setLoading(false);
-    }
-  }, [query, checkSearchLimit, isSignedIn]); // ← Fixed dependencies!
+      try {
+        if (!isSignedIn) {
+          incrementSearchCount();
+        }
 
-  // Submit search (for form submission)
-  const handleSearchSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    return await performSearch();
-  }, [performSearch]);
+        console.log("🔍 Searching for:", termToSearch);
+        const results = await placesService.searchPlaces(termToSearch);
+        console.log("🎯 Search results received:", results);
 
-  // Clear search results - FIXED!
+        setSearchResults(results);
+
+        const newHistory = addToSearchHistory(termToSearch);
+        setSearchHistory(newHistory);
+
+        setShowDropdown(false);
+        return results;
+      } catch (err) {
+        setError("Search failed. Please try again.");
+        console.error("Error performing search:", err);
+        return [];
+      } finally {
+        setLoading(false);
+      }
+    },
+    [query, checkSearchLimit, isSignedIn]
+  );
+
+  const handleSearchSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      return await performSearch();
+    },
+    [performSearch]
+  );
+
   const clearSearch = useCallback(() => {
     setQuery("");
     setSearchResults([]);
     setPredictions([]);
     setShowDropdown(false);
     setError(null);
-    
-    // Clear any pending debounce timer
+
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
       debounceTimerRef.current = null;
     }
   }, []);
 
-  // Clear search history
   const clearSearchHistory = useCallback(() => {
     clearStoredHistory();
     setSearchHistory([]);
   }, []);
 
-  // Focus dropdown
   const showPredictionsDropdown = useCallback(() => {
     if (predictions.length > 0) {
       setShowDropdown(true);
     }
   }, [predictions.length]);
 
-  // Hide dropdown
   const hidePredictionsDropdown = useCallback(() => {
-    // Small delay to allow for selection clicks
     setTimeout(() => setShowDropdown(false), 150);
   }, []);
 
-  // Cleanup timer on unmount
   useEffect(() => {
     return () => {
       if (debounceTimerRef.current) {
@@ -190,7 +177,6 @@ export function useSearch() {
   }, []);
 
   return {
-    // Search state
     query,
     searchResults,
     predictions,
@@ -199,7 +185,6 @@ export function useSearch() {
     loading,
     error,
 
-    // Search actions  
     handleSearchInput,
     handleSelectPrediction,
     handleSearchSubmit,
@@ -207,17 +192,11 @@ export function useSearch() {
     clearSearch,
     clearSearchHistory,
 
-    // Dropdown actions
     showPredictionsDropdown,
     hidePredictionsDropdown,
 
-    // Search limits
     searchesRemaining: getSearchesRemaining(isSignedIn),
 
-    // Utilities
-    clearError: () => setError(null)
+    clearError: () => setError(null),
   };
 }
-
-
-
