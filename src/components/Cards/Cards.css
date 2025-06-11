@@ -85,6 +85,10 @@
   color: #888;
 }
 
+.heart-icon{
+  padding-right:2px;
+}
+
 .globe-image {
   border-radius: 50%;
   max-width: 200px;
@@ -99,6 +103,8 @@
 }
 
 .heart-button {
+  display: flex;
+  align-items: center;
   color: black;
   background-color: rgba(200, 200, 200, 0.9);
 }
