@@ -8,7 +8,7 @@
   }
 }
 
-.cards-containers {
+.cards__containers {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +18,7 @@
   box-sizing: border-box;
 }
 
-.card-container {
+.card__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,7 +33,7 @@
   box-sizing: border-box;
 }
 
-.card-container:hover {
+.card__container:hover {
   box-shadow: 1px 1px 20px 15px rgb(32, 44, 1, 1);
   border: 4px solid #a0522d;
 }
@@ -50,13 +50,13 @@
   position: relative;
 }
 
-.card-image {
+.card__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.card-info {
+.card__info {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@
   justify-content: space-between;
 }
 
-.card-description {
+.card__description {
   font-family: "CrimsonPro-BoldItalic";
   font-size: 16px;
   padding: 8px;
@@ -80,20 +80,20 @@
   justify-content: center;
 }
 
-.card-address {
-  width: 320px;
+.card__address {
+  max-width: 320px;
 }
 
-.card-image {
+.card__image {
   font-size: 14px;
   color: #888;
 }
 
-.heart-icon {
+.heart__icon {
   padding-right: 2px;
 }
 
-.globe-image {
+.globe__image {
   border-radius: 50%;
   max-width: 200px;
   width: 100%;
@@ -102,18 +102,18 @@
   animation: logo-spin 20s linear infinite;
 }
 
-.heart-button .filled {
+.heart__button .filled {
   color: #e74c3c;
 }
 
-.heart-button {
+.heart__button {
   display: flex;
   align-items: center;
   color: black;
   background-color: rgba(200, 200, 200, 0.9);
 }
 
-.card-actions {
+.card__actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -121,7 +121,7 @@
   gap: 1rem;
 }
 
-.qr-code-container {
+.qr__code-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,30 +130,30 @@
   transition: transform 0.2s ease;
 }
 
-.qr-code-container:hover {
+.qr__code-container:hover {
   transform: scale(1.05);
 }
 
-.qr-code {
+.qr__code {
   background: white;
   padding: 0.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.qr-label {
+.qr__label {
   font-size: 0.8rem;
   color: #666;
   text-align: center;
 }
 
 @media (min-width: 480px) {
-  .cards-containers {
+  .cards__containers {
     gap: 25px;
     padding: 25px 15px;
   }
 
-  .card-container {
+  .card__container {
     max-width: 320px;
   }
 
@@ -161,19 +161,19 @@
     height: 280px;
   }
 
-  .card-description {
+  .card__description {
     font-size: 18px;
     padding: 10px;
     min-height: 50px;
   }
 
-  .globe-image {
+  .globe__image {
     max-width: 220px;
   }
 }
 
 @media (min-width: 768px) {
-  .cards-containers {
+  .cards__containers {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
@@ -181,7 +181,7 @@
     padding: 30px 20px;
   }
 
-  .card-container {
+  .card__container {
     max-width: 275px;
     flex: 0 1 calc(50% - 15px);
   }
@@ -190,26 +190,26 @@
     height: 300px;
   }
 
-  .card-description {
+  .card__description {
     font-size: 19px;
     height: 50px;
     min-height: auto;
   }
 
-  .globe-image {
+  .globe__image {
     max-width: 240px;
   }
 }
 
 @media (min-width: 1024px) {
-  .cards-containers {
+  .cards__containers {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 30px;
   }
 
-  .card-container {
+  .card__container {
     flex: 0 1 auto;
   }
 
@@ -217,28 +217,28 @@
     height: 325px;
   }
 
-  .card-description {
+  .card__description {
     font-size: 20px;
   }
 
-  .globe-image {
+  .globe__image {
     max-width: 250px;
   }
 }
 
 @media (min-width: 1280px) {
-  .cards-containers {
+  .cards__containers {
     gap: 40px;
   }
 }
 
 @media (max-width: 480px) {
-  .card-actions {
+  .card__actions {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .qr-code-container {
+  .qr__code-container {
     margin-top: 1rem;
   }
 }

@@ -22,7 +22,7 @@
   position: relative;
 }
 
-.confirm__modal-globe-image {
+.confirm__modal_globe-image {
   width: 150px;
   animation: logo-spin 20s linear infinite;
 }

@@ -37,15 +37,17 @@ Vite was utilized to assist React and many of it's configurations.
 
 <img src="./src/assets/vercel.png" alt="Picture of Vercel logo" width="70" height="70"> **Vercel**
 
+Vercel was used to help build and deploy this website.
 
 <img src="./src/assets/firebase.png" alt="Picture of Firebase logo" width="80" height="80"> **Firebase**
 
+Firebase was used in the assistance of the Backend. The ability to utilize databases was instrumental here as well.
   
 <img src="./src/assets/figma.png" alt="Picture of Figma logo" width="50" height="50"> **Figma**
 
 Figma is a web based program that allows coders and designers to interact with each other for the purposes of collaborating on a project together. The purpose of the figma in this project was to give a general outline of the build
 
-* [Link to the project on Figma]()
+* [Link to the project on Figma](https://www.figma.com/design/orhfXe81OPKUIftkmBK7dj/GREEN-FINDR?node-id=0-1&p=f&t=FkXEiHWRwasrh6Go-0)
 
 **Responsive Design**
 

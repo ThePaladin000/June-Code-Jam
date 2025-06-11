@@ -6,22 +6,22 @@ const tree =
 export default function Footer() {
   return (
     <div className="footer">
-      <div className="footer-contributors">
-        <div className="footer-contributor">
-          <div className="footer-image">
+      <div className="footer__contributors">
+        <div className="footer__contributor">
+          <div className="footer__image">
             <img
               src={tree}
               alt="Drawing of a tree"
-              className="footer-tree footer-tree-crow"
+              className="footer__tree footer__tree-crow"
             />{" "}
           </div>
           <div
             title="Link to Crow's GitHub"
-            className="footer-contributor-container"
+            className="footer__contributor-container"
           >
             <a
               href="https://github.com/Buffalo-Crow"
-              className="footer-contributor-name"
+              className="footer__contributor-name"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -29,21 +29,21 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="footer-contributor">
-          <div className="footer-image">
+        <div className="footer__contributor">
+          <div className="footer__image">
             <img
               src={tree}
               alt="Drawing of a tree"
-              className="footer-tree footer-tree-rich"
+              className="footer__tree footer__tree-rich"
             />
           </div>
           <div
             title="Link to Ri₵h's GitHub"
-            className="footer-contributor-container"
+            className="footer__contributor-container"
           >
             <a
               href="https://github.com/TonyRiches17"
-              className="footer-contributor-name"
+              className="footer__contributor-name"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -51,21 +51,21 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="footer-contributor">
-          <div className="footer-image">
+        <div className="footer__contributor">
+          <div className="footer__image">
             <img
               src={tree}
               alt="Drawing of a tree"
-              className="footer-tree footer-tree-majestyk"
+              className="footer__tree footer__tree-majestyk"
             />
           </div>
           <div
             title="Link to Majestyk's GitHub"
-            className="footer-contributor-container"
+            className="footer__contributor-container"
           >
             <a
               href="https://github.com/Majestyk1"
-              className="footer-contributor-name"
+              className="footer__contributor-name"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -73,21 +73,21 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="footer-contributor">
-          <div className="footer-image">
+        <div className="footer__contributor">
+          <div className="footer__image">
             <img
               src={tree}
               alt="Drawing of a tree"
-              className="footer-tree footer-tree-joshua"
+              className="footer__tree footer__tree-joshua"
             />
           </div>
           <div
             title="Link to Joshua's GitHub"
-            className="footer-contributor-container"
+            className="footer__contributor-container"
           >
             <a
               href="https://github.com/ThePaladin000"
-              className="footer-contributor-name"
+              className="footer__contributor-name"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -96,7 +96,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <h3 className="footer-footer">&copy;2025 Created by</h3>
+      <h3 className="footer__footer">&copy;2025 Created by</h3>
     </div>
   );
 }

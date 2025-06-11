@@ -80,34 +80,34 @@ function Profile() {
   return (
     <div>
       <Navbar />
-      <div className="profile-container">
-        <h1 className="profile-title">MY GREEN BUCKET LIST</h1>
+      <div className="profile__container">
+        <h1 className="profile__title">MY GREEN BUCKET LIST</h1>
 
         {fetchingDetails ? (
-          <div className="loading-state">
-            <p className="profile-text">Cards are loading</p>
+          <div className="profile__loading-state">
+            <p className="profile__text">Cards are loading</p>
             <Spinner />
           </div>
         ) : savedPlaceDetails.length === 0 ? (
-          <div className="empty-state">
-            <p className="profile-text">No saved places yet!</p>
-            <p className="profile-text">
+          <div className="profile__empty-state">
+            <p className="profile__text">No saved places yet!</p>
+            <p className="profile__text">
               Search for places on the home page and click the heart to save
               them here.
             </p>
           </div>
         ) : (
-          <div className="carousel-section">
-            <p className="carousel-section-text">
+          <div className="profile__carousel_section">
+            <p className="profile__carousel_section-text">
               You have {savedPlaceDetails.length} saved place
               {savedPlaceDetails.length !== 1 ? "s" : ""}
             </p>
 
             {/* ✨ CAROUSEL CONTAINER */}
-            <div className="carousel-container">
+            <div className="profile__carousel-container">
               {/* LEFT ARROW */}
               <button
-                className="carousel-arrow carousel-arrow-left"
+                className="profile__carousel_arrow profile__carousel_arrow-left"
                 onClick={handlePrev}
                 disabled={savedPlaceDetails.length <= 1}
               >
@@ -115,15 +115,18 @@ function Profile() {
               </button>
 
               {/* CAROUSEL CONTENT */}
-              <div className="carousel-viewport">
+              <div className="profile__carousel-viewport">
                 <div
-                  className="carousel-track"
+                  className="profile__carousel-track"
                   style={{
                     transform: `translateX(-${currentIndex * 100}%)`,
                   }}
                 >
                   {savedPlaceDetails.map((place, index) => (
-                    <div key={place.id || index} className="carousel-slide">
+                    <div
+                      key={place.id || index}
+                      className="profile__carousel-slide"
+                    >
                       {fetchingDetails ? (
                         <Spinner />
                       ) : (
@@ -136,7 +139,7 @@ function Profile() {
 
               {/* RIGHT ARROW */}
               <button
-                className="carousel-arrow carousel-arrow-right"
+                className="profile__carousel_arrow profile__carousel_arrow-right"
                 onClick={handleNext}
                 disabled={savedPlaceDetails.length <= 1}
               >
@@ -146,11 +149,11 @@ function Profile() {
 
             {/* ✨ PAGINATION DOTS */}
             {savedPlaceDetails.length > 1 && (
-              <div className="carousel-dots">
+              <div className="profile__carousel-dots">
                 {savedPlaceDetails.map((_, index) => (
                   <button
                     key={index}
-                    className={`carousel-dot ${
+                    className={`profile__carousel-dot ${
                       index === currentSlide ? "active" : ""
                     }`}
                     onClick={() => {

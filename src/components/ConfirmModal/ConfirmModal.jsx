@@ -15,7 +15,7 @@ export default function ConfirmModal({ isOpen, onClose, onConfirm }) {
         <img
           src="https://6tlg35rybd.ufs.sh/f/JT0pvUmaDUtZBNzrJheQ2aqORSW8MCezTibwhEHBFkt7xAcG"
           alt="GreenFindr Spinning logo"
-          className="confirm__modal-globe-image"
+          className="confirm__modal_globe-image"
         />
         <h2 className="confirm__modal-title">
           Are you sure you want to remove this from your GREEN BUCKET?
