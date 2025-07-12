@@ -1,14 +1,13 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    //Allow each user to read/write only their own profile
-    match /users/{userId} {
+    // Allow users to read/write only their own saved places
+    match /userSavedPlaces/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
 
-    //Deny all other access by default
+    // Deny everything else by default
     match /{document=**} {
       allow read, write: if false;
     }
