@@ -23,6 +23,7 @@
   transform: translateX(-50%);
   height: 50px;
   width: 60px;
+  margin-top: 20px;
 }
 
 .navbar__icon {

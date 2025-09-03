@@ -15,7 +15,7 @@ export default function Navbar() {
   const { user } = useUser();
 
   return (
-    <header className="navbar">
+    <nav className="navbar">
       <div className="navbar__left">
         <FaHome
           className="navbar__icon"
@@ -53,6 +53,6 @@ export default function Navbar() {
           )}
         </SignedIn>
       </div>
-    </header>
+    </nav>
   );
 }

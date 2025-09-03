@@ -5,7 +5,7 @@ const tree =
 
 export default function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="footer__contributors">
         <div className="footer__contributor">
           <div className="footer__image">
@@ -97,6 +97,6 @@ export default function Footer() {
         </div>
       </div>
       <h3 className="footer__footer">&copy;2025 Created by</h3>
-    </div>
+    </footer>
   );
 }
