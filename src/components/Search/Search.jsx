@@ -123,7 +123,7 @@ export default function Search({ onPlacesFetched, onLoading }) {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="search-container">
         <form
           className="search-form"
